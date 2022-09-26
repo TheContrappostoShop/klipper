@@ -9,14 +9,10 @@ import stepper
 class ZonlyKinematics:
     def __init__(self, toolhead, config):
         self.printer = config.get_printer()
-        # Setup axis rails
-        self.rails = [stepper.LookupMultiRail(config.getsection('stepper_' + n))
-                      for n in 'z']			
-	#self.rails.append(self.rails[0])
-  	#self.rails.append(self.rails[0])
-  	 
-	for rail, axis in zip(self.rails, 'z'):
-            rail.setup_itersolve('cartesian_stepper_alloc', axis.encode())
+        # Setup z axis rail
+        self.z_rail = stepper.LookupMultiRail(config.getsection('stepper_z'))		
+
+        self.z_rail.setup_itersolve('cartesian_stepper_alloc', axis.encode())
         for s in self.get_steppers():
             s.set_trapq(toolhead.get_trapq())
             toolhead.register_step_generator(s.generate_steps)
@@ -28,62 +24,59 @@ class ZonlyKinematics:
                                               above=0., maxval=max_velocity)
         self.max_z_accel = config.getfloat('max_z_accel', max_accel,
                                            above=0., maxval=max_accel)
-        self.limits = [(1.0, 1.0),(1.0, 1.0),(1.0, -1.0)]
-        ranges = [r.get_range() for r in self.rails]
-        self.axes_min = toolhead.Coord(0, 0, ranges[0][0], e=0.)
-        self.axes_max = toolhead.Coord(0, 0, ranges[0][1], e=0.)
+
+        self.limit = (1.0,-1.0)
+
+        z_range = z_rail.get_range()
+        self.axes_min = toolhead.Coord(0, 0, z_range[0], e=0.)
+        self.axes_max = toolhead.Coord(0, 0, z_range[1], e=0.)
 
     def get_steppers(self):
-        rails = self.rails
-        return [s for rail in rails for s in rail.get_steppers()]
+        return self.z_rail.get_steppers()
 
     def calc_position(self, stepper_positions):
-        pos = [stepper_positions[rail.get_name()] for rail in self.rails]
-        return [0, 0, pos[0]]
+        return [0, 0, stepper_positions[self.z_rail.get_name()]]
 
     def set_position(self, newpos, homing_axes):
-        for i, rail in enumerate(self.rails):
-            rail.set_position(newpos)
-            if 2 in homing_axes:
-                self.limits[2] = rail.get_range()
+        self.z_rail.set_position(newpos)
+        if 2 in homing_axes:
+            self.limit = self.z_rail.get_range()
     def note_z_not_homed(self):
         # Helper for Safe Z Home
-        self.limits[2] = [(1.0, 1.0),(1.0, 1.0),(1.0, -1.0)]
-    def _home_axis(self, homing_state, axis, rail):
+        self.limit = (1.0, -1.0)
+
+    def _home_z_axis(self, homing_state):
         # Determine movement
-        position_min, position_max = rail.get_range()
-        hi = rail.get_homing_info()
-        homepos = [None, None, None, None]
-        homepos[axis] = hi.position_endstop
-        forcepos = list(homepos)
+        position_min, position_max = self.z_rail.get_range()
+        hi = self.z_rail.get_homing_info()
+        forcepos = hi.position_endstop
         if hi.positive_dir:
-            forcepos[axis] -= 1.5 * (hi.position_endstop - position_min)
+            forcepos -= 1.5 * (hi.position_endstop - position_min)
         else:
-            forcepos[axis] += 1.5 * (position_max - hi.position_endstop)
+            forcepos += 1.5 * (position_max - hi.position_endstop)
         # Perform homing
-        homing_state.home_rails([rail], forcepos, homepos)
+        homing_state.home_rails(
+            [self.z_rail], 
+            [None, None, forcepos, None]
+            [None, None, hi.position_endstop, None]
+        )
 
     def home(self, homing_state):
-        # Each axis is homed independently and in order
-        for axis in homing_state.get_axes():
-            if axis is not 2:
-                pass
-            else:
-                self._home_axis(homing_state, axis, self.rails[0])
+        # Only z axis homing is respected
+        if 2 in homing_state.get_axes():
+            self._home_z_axis(homing_state)
 
     def _motor_off(self, print_time):
-        self.limits = [(1.0, 1.0),(1.0, 1.0),(1.0, -1.0)]
+        self.limit = (1.0, -1.0)
 
     def _check_endstops(self, move):
-        end_pos = move.end_pos
-        for i in (0, 1, 2):
-            if (move.axes_d[i] and (end_pos[i] < self.limits[i][0] or end_pos[i] > self.limits[i][1])):
-                if self.limits[i][0] > self.limits[i][1]:
-                    raise move.move_error("Must home axis first "+str(i))
-            	raise move.move_error()
+        end_pos = move.end_pos[2]
+        if move.axes_d[2] and (end_pos < self.limit[0] or endpos > self.limit[1]):
+            if self.limit[0] > self.limit[1]:
+                raise move.move_error("Must home axis first")
+            raise move.move_error()
 
     def check_move(self, move):
-        limits = self.limits
         if not move.axes_d[2]:
             # Normal XY move - use defaults
             return
@@ -92,10 +85,10 @@ class ZonlyKinematics:
         z_ratio = move.move_d / abs(move.axes_d[2])
         move.limit_speed(
             self.max_z_velocity * z_ratio, self.max_z_accel * z_ratio)
-    def get_status(self, eventtime):
-        axes = [a for a, (l, h) in zip("z", self.limits) if l <= h]
+
+    def get_status(self, eventtime):        
         return {
-            'homed_axes': "".join(axes),
+            'homed_axes': "z" if self.limit[0]<self.limit[1] else "",
             'axis_minimum': self.axes_min,
             'axis_maximum': self.axes_max,
         }
