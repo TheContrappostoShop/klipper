@@ -12,7 +12,7 @@ class ZonlyKinematics:
         # Setup z axis rail
         self.z_rail = stepper.LookupMultiRail(config.getsection('stepper_z'))		
 
-        self.z_rail.setup_itersolve('cartesian_stepper_alloc', axis.encode())
+        self.z_rail.setup_itersolve('cartesian_stepper_alloc', 'z'.encode())
         for s in self.get_steppers():
             s.set_trapq(toolhead.get_trapq())
             toolhead.register_step_generator(s.generate_steps)
