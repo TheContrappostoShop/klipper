@@ -27,7 +27,7 @@ class ZonlyKinematics:
 
         self.limit = (1.0,-1.0)
 
-        z_range = z_rail.get_range()
+        z_range = self.z_rail.get_range()
         self.axes_min = toolhead.Coord(0, 0, z_range[0], e=0.)
         self.axes_max = toolhead.Coord(0, 0, z_range[1], e=0.)
 
@@ -57,7 +57,7 @@ class ZonlyKinematics:
         # Perform homing
         homing_state.home_rails(
             [self.z_rail], 
-            [None, None, forcepos, None]
+            [None, None, forcepos, None],
             [None, None, hi.position_endstop, None]
         )
 
@@ -71,7 +71,7 @@ class ZonlyKinematics:
 
     def _check_endstops(self, move):
         end_pos = move.end_pos[2]
-        if move.axes_d[2] and (end_pos < self.limit[0] or endpos > self.limit[1]):
+        if move.axes_d[2] and (end_pos < self.limit[0] or end_pos > self.limit[1]):
             if self.limit[0] > self.limit[1]:
                 raise move.move_error("Must home axis first")
             raise move.move_error()
