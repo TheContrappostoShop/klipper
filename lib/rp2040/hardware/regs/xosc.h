@@ -138,7 +138,7 @@
 // Field       : XOSC_STARTUP_DELAY
 // Description : in multiples of 256*xtal_period
 #define XOSC_STARTUP_DELAY_RESET  "-"
-#define XOSC_STARTUP_DELAY_BITS   _u(0x00003fff)
+#define XOSC_STARTUP_DELAY_BITS   _u(0x0003fff0)
 #define XOSC_STARTUP_DELAY_MSB    _u(13)
 #define XOSC_STARTUP_DELAY_LSB    _u(0)
 #define XOSC_STARTUP_DELAY_ACCESS "RW"
