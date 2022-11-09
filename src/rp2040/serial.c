@@ -14,10 +14,10 @@
 #include "internal.h" // UART0_IRQn
 #include "sched.h" // DECL_INIT
 
-#define UARTx uart0_hw
-#define UARTx_IRQn UART0_IRQ_IRQn
-#define GPIO_Rx 1
-#define GPIO_Tx 0
+#define UARTx uart1_hw
+#define UARTx_IRQn UART1_IRQ_IRQn
+#define GPIO_Rx 7
+#define GPIO_Tx 6
 
 // Write tx bytes to the serial port
 static void
