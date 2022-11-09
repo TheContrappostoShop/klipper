@@ -67,10 +67,10 @@ serial_enable_tx_irq(void)
 void
 serial_init(void)
 {
-    enable_pclock(RESETS_RESET_UART0_BITS);
+    enable_pclock(RESETS_RESET_UART1_BITS);
 
     // Setup baud
-    uint32_t pclk = get_pclock_frequency(RESETS_RESET_UART0_BITS);
+    uint32_t pclk = get_pclock_frequency(RESETS_RESET_UART1_BITS);
     uint32_t div = DIV_ROUND_CLOSEST(pclk * 4, CONFIG_SERIAL_BAUD);
     UARTx->ibrd = div >> 6;
     UARTx->fbrd = div & 0x3f;
