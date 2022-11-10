@@ -278,7 +278,7 @@ USB_Handler(void)
             }
         }
     }
-    if (ints & USB_INTS_BUS_RESET_BITS) {
+    if (ints & USB_INTS_BUS_RESET_BITS || !(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BITS)) {
         usb_hw->sie_status = USB_SIE_STATUS_BUS_RESET_BITS;
         sched_wake_task(&usb_errata_wake);
     }
