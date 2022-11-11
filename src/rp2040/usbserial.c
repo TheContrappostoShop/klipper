@@ -16,6 +16,7 @@
 #include "hardware/structs/padsbank0.h" // padsbank0_hw
 #include "hardware/structs/resets.h" // RESETS_RESET_USBCTRL_BITS
 #include "hardware/structs/usb.h" // usb_hw
+#include "hardware/structs/watchdog.h" // watchdog_hw
 #include "internal.h" // enable_pclock
 #include "sched.h" // DECL_INIT
 
@@ -278,10 +279,15 @@ USB_Handler(void)
             }
         }
     }
-    if (ints & USB_INTS_BUS_RESET_BITS || !(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BITS)) {
+    if (ints & USB_INTS_BUS_RESET_BITS) {
         usb_hw->sie_status = USB_SIE_STATUS_BUS_RESET_BITS;
         sched_wake_task(&usb_errata_wake);
     }
+    if (!(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BITS)) {
+        // if not connected
+        watchdog_hw->ctrl = 0x80000000;
+    }
+
 }
 
 static void
