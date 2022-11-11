@@ -251,6 +251,14 @@ usb_errata_task(void)
 }
 DECL_TASK(usb_errata_task);
 
+void
+usb_reset(void) {
+    if (!(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BITS)) {
+        // if not connected
+        watchdog_hw->ctrl = 0x80000000;
+    }
+}
+DECL_TASK(usb_reset);
 
 /****************************************************************
  * Setup and interrupts
@@ -283,11 +291,6 @@ USB_Handler(void)
         usb_hw->sie_status = USB_SIE_STATUS_BUS_RESET_BITS;
         sched_wake_task(&usb_errata_wake);
     }
-    if (!(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BITS)) {
-        // if not connected
-        watchdog_hw->ctrl = 0x80000000;
-    }
-
 }
 
 static void
