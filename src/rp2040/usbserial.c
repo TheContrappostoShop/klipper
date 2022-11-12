@@ -257,7 +257,7 @@ usb_reset(void) {
     if ((usb_hw->sie_status & (USB_SIE_STATUS_CONNECTED_BITS | USB_SIE_STATUS_SUSPENDED_BITS)) != USB_SIE_STATUS_CONNECTED_BITS ) {
         // if not connected
         scb_hw->aircr = M0PLUS_AIRCR_SYSRESETREQ_BITS;
-        usb_hw->phy_direct_override = (USB_USBPHY_DIRECT_OVERRIDE_TX_PD_OVERRIDE_EN_BITS | USB_USBPHY_DIRECT_OVERRIDE_TX_PD_OVERRIDE_EN_BITS)
+        usb_hw->phy_direct_override = (USB_USBPHY_DIRECT_OVERRIDE_TX_PD_OVERRIDE_EN_BITS | USB_USBPHY_DIRECT_OVERRIDE_TX_PD_OVERRIDE_EN_BITS);
         usb_hw->phy_direct = (USB_USBPHY_DIRECT_TX_PD_BITS | USB_USBPHY_DIRECT_RX_PD_BITS);
         sleep(0.5);
         usb_hw->phy_direct = (USB_USBPHY_DIRECT_RESET);
