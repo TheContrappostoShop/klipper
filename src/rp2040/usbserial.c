@@ -254,7 +254,7 @@ DECL_TASK(usb_errata_task);
 
 void
 usb_reset(void) {
-    if (!(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BiITS)) {
+    if (!(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BITS)) {
         // if not connected
         scb_hw->aircr = M0PLUS_AIRCR_SYSRESETREQ_BITS;
     }
