@@ -259,7 +259,11 @@ usb_reset(void) {
         scb_hw->aircr = M0PLUS_AIRCR_SYSRESETREQ_BITS;
         usb_hw->phy_direct_override = (USB_USBPHY_DIRECT_OVERRIDE_TX_PD_OVERRIDE_EN_BITS | USB_USBPHY_DIRECT_OVERRIDE_TX_PD_OVERRIDE_EN_BITS);
         usb_hw->phy_direct = (USB_USBPHY_DIRECT_TX_PD_BITS | USB_USBPHY_DIRECT_RX_PD_BITS);
-        sleep_ms(500);
+        
+        // Wait 400ms
+        uint32_t endtime = timer_read_time() + timer_from_us(400000);
+        while (timer_is_before(timer_read_time(), endtime));
+
         usb_hw->phy_direct = (USB_USBPHY_DIRECT_RESET);
         usb_hw->phy_direct_override = (USB_USBPHY_DIRECT_OVERRIDE_RESET);
     }
