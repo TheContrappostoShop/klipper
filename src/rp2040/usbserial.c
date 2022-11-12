@@ -12,11 +12,12 @@
 #include "board/usb_cdc_ep.h" // USB_CDC_EP_BULK_IN
 #include "board/usbstd.h" // USB_ENDPOINT_XFER_INT
 #include "hardware/regs/sysinfo.h" // SYSINFO_CHIP_ID_OFFSET
+#include "hardware/regs/m0plus.h" // M0PLUS_AIRCR_SYSRESETREQ_BITS
 #include "hardware/structs/iobank0.h" // iobank0_hw
 #include "hardware/structs/padsbank0.h" // padsbank0_hw
 #include "hardware/structs/resets.h" // RESETS_RESET_USBCTRL_BITS
 #include "hardware/structs/usb.h" // usb_hw
-#include "hardware/structs/watchdog.h" // watchdog_hw
+#include "hardware/structs/scb.h" //scb_hw
 #include "internal.h" // enable_pclock
 #include "sched.h" // DECL_INIT
 
@@ -253,9 +254,9 @@ DECL_TASK(usb_errata_task);
 
 void
 usb_reset(void) {
-    if (!(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BITS)) {
+    if (!(usb_hw->sie_status & USB_SIE_STATUS_CONNECTED_BiITS)) {
         // if not connected
-        watchdog_hw->ctrl = 0x80000000;
+        scb_hw->aircr = M0PLUS_AIRCR_SYSRESETREQ_BITS;
     }
 }
 DECL_TASK(usb_reset);
