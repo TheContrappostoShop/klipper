@@ -253,20 +253,32 @@ usb_errata_task(void)
 DECL_TASK(usb_errata_task);
 
 void
-usb_reset(void) {
-    if ((usb_hw->sie_status & (USB_SIE_STATUS_CONNECTED_BITS | USB_SIE_STATUS_SUSPENDED_BITS)) != USB_SIE_STATUS_CONNECTED_BITS ) {
-        // if not connected
-        scb_hw->aircr = M0PLUS_AIRCR_SYSRESETREQ_BITS;
-        usb_hw->phy_direct_override = (USB_USBPHY_DIRECT_OVERRIDE_TX_PD_OVERRIDE_EN_BITS | USB_USBPHY_DIRECT_OVERRIDE_TX_PD_OVERRIDE_EN_BITS);
-        usb_hw->phy_direct = (USB_USBPHY_DIRECT_TX_PD_BITS | USB_USBPHY_DIRECT_RX_PD_BITS);
-        
-        // Wait 400ms
-        uint32_t endtime = timer_read_time() + timer_from_us(400000);
-        while (timer_is_before(timer_read_time(), endtime));
-
-        usb_hw->phy_direct = (USB_USBPHY_DIRECT_RESET);
-        usb_hw->phy_direct_override = (USB_USBPHY_DIRECT_OVERRIDE_RESET);
-    }
+usb_reset(void)
+{
+    if((usb_hw->sie_status & (USB_SIE_STATUS_CONNECTED_BITS | USB_SIE_STATUS_SUSPENDED_BITS)) == USB_SIE_STATUS_CONNECTED_BITS)
+        return;
+    
+    usb_hw->phy_direct = USB_USBPHY_DIRECT_RESET
+        | USB_USBPHY_DIRECT_TX_DP_OE_BITS
+        | USB_USBPHY_DIRECT_TX_DM_OE_BITS
+        &~USB_USBPHY_DIRECT_TX_DP_BITS
+        &~USB_USBPHY_DIRECT_TX_DM_BITS
+        &~USB_USBPHY_DIRECT_TX_DIFFMODE_BITS
+        ;
+    usb_hw->phy_direct_override = USB_USBPHY_DIRECT_OVERRIDE_RESET
+        | USB_USBPHY_DIRECT_OVERRIDE_TX_DP_OE_OVERRIDE_EN_BITS
+        | USB_USBPHY_DIRECT_OVERRIDE_TX_DM_OE_OVERRIDE_EN_BITS
+        | USB_USBPHY_DIRECT_OVERRIDE_TX_DP_OVERRIDE_EN_BITS
+        | USB_USBPHY_DIRECT_OVERRIDE_TX_DM_OVERRIDE_EN_BITS
+        | USB_USBPHY_DIRECT_OVERRIDE_TX_DIFFMODE_OVERRIDE_EN_BITS
+        ;
+    
+    uint32_t endtime = timer_read_time() + timer_from_us(400000);
+    while(timer_is_before(timer_read_time(), endtime))
+        ;
+    
+    usb_hw->phy_direct = USB_USBPHY_DIRECT_RESET;
+    usb_hw->phy_direct_override = USB_USBPHY_DIRECT_OVERRIDE_RESET;
 }
 DECL_TASK(usb_reset);
 
