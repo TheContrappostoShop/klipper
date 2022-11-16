@@ -5,11 +5,14 @@
 // This file may be distributed under the terms of the GNU GPLv3 license.
 
 #include <stdint.h> // uint32_t
+#include "board/misc.h" // bootloader_request
+#include "generic/armcm_reset.h" // try_request_canboot
 #include "hardware/structs/clocks.h" // clock_hw_t
 #include "hardware/structs/pll.h" // pll_hw_t
 #include "hardware/structs/resets.h" // sio_hw
 #include "hardware/structs/watchdog.h" // watchdog_hw
 #include "hardware/structs/xosc.h" // xosc_hw
+#include "internal.h" // enable_pclock
 #include "sched.h" // sched_main
 
 
@@ -34,6 +37,19 @@ watchdog_init(void)
                          | WATCHDOG_CTRL_ENABLE_BITS);
 }
 DECL_INIT(watchdog_init);
+
+
+/****************************************************************
+ * Bootloader
+ ****************************************************************/
+
+void
+bootloader_request(void)
+{
+    try_request_canboot();
+    // Use the bootrom-provided code to reset into BOOTSEL mode
+    reset_to_usb_boot(0, 0);
+}
 
 
 /****************************************************************
