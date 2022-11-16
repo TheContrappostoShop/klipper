@@ -20,7 +20,12 @@
 #include "hardware/structs/scb.h" //scb_hw
 #include "internal.h" // enable_pclock
 #include "sched.h" // DECL_INIT
+#include <hardware/structs/watchdog.h>
+#include <hardware/structs/psm.h>
 
+static uint32_t nexttrig;
+const uint32_t MAGIC1 = 0xC0FF1000;
+const uint32_t MAGIC2 = 0xF00FBEEF;
 
 /****************************************************************
  * USB transfer memory
@@ -252,35 +257,53 @@ usb_errata_task(void)
 }
 DECL_TASK(usb_errata_task);
 
+void reset_watchdog(void)
+{
+    irq_disable();
+    watchdog_hw->scratch[0] = MAGIC1;
+    watchdog_hw->scratch[5] = MAGIC2;
+    watchdog_hw->ctrl = 0;
+    psm_hw->wdsel = ((1 << 17) - 1) & ~3;
+    watchdog_hw->load = 5;
+    watchdog_hw->tick = 4 | (1 << 9);
+    watchdog_hw->ctrl = 3 << 30;
+    while(1);
+}
+
 void
 usb_reset(void)
 {
+    if(timer_is_before(timer_read_time(), nexttrig))
+        return;
+
+    nexttrig = timer_read_time() + timer_from_us(500000);
+
     if((usb_hw->sie_status & (USB_SIE_STATUS_CONNECTED_BITS | USB_SIE_STATUS_SUSPENDED_BITS)) == USB_SIE_STATUS_CONNECTED_BITS)
         return;
+
+    if(watchdog_hw->reason == 0)
+        reset_watchdog();
+
+    if(watchdog_hw->scratch[0] != MAGIC1 || watchdog_hw->scratch[5] != MAGIC2)
+        reset_watchdog();
+
+    watchdog_hw->scratch[0] = 0;
+    watchdog_hw->scratch[5] = 0;
+
+    return;
     
-    usb_hw->phy_direct = USB_USBPHY_DIRECT_RESET
-        | USB_USBPHY_DIRECT_TX_DP_OE_BITS
-        | USB_USBPHY_DIRECT_TX_DM_OE_BITS
-        &~USB_USBPHY_DIRECT_TX_DP_BITS
-        &~USB_USBPHY_DIRECT_TX_DM_BITS
-        &~USB_USBPHY_DIRECT_TX_DIFFMODE_BITS
-        ;
-    usb_hw->phy_direct_override = USB_USBPHY_DIRECT_OVERRIDE_RESET
-        | USB_USBPHY_DIRECT_OVERRIDE_TX_DP_OE_OVERRIDE_EN_BITS
-        | USB_USBPHY_DIRECT_OVERRIDE_TX_DM_OE_OVERRIDE_EN_BITS
-        | USB_USBPHY_DIRECT_OVERRIDE_TX_DP_OVERRIDE_EN_BITS
-        | USB_USBPHY_DIRECT_OVERRIDE_TX_DM_OVERRIDE_EN_BITS
-        | USB_USBPHY_DIRECT_OVERRIDE_TX_DIFFMODE_OVERRIDE_EN_BITS
-        ;
-    
-    uint32_t endtime = timer_read_time() + timer_from_us(400000);
-    while(timer_is_before(timer_read_time(), endtime))
-        ;
-    
-    usb_hw->phy_direct = USB_USBPHY_DIRECT_RESET;
-    usb_hw->phy_direct_override = USB_USBPHY_DIRECT_OVERRIDE_RESET;
 }
 DECL_TASK(usb_reset);
+
+void
+usb_reset_init(void)
+{
+    nexttrig = timer_read_time() + timer_from_us(10000);
+    if(timer_is_before(timer_read_time(), nexttrig))
+        return;
+
+}
+DECL_INIT(usb_reset_init);
 
 /****************************************************************
  * Setup and interrupts
