@@ -169,6 +169,12 @@
                   </a>
                 </li>
                 
+                <li class="md-select__item">
+                  <a href="/it/" hreflang="it" class="md-select__link">
+                    Italiano
+                  </a>
+                </li>
+                
             </ul>
           </div>
         </div>
@@ -495,14 +501,14 @@
       
       
         <label class="md-nav__link" for="__nav_7_4">
-          Ágy szint
+          Tárgyasztal szint
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Ágy szint" data-md-level="2">
+      <nav class="md-nav" aria-label="Tárgyasztal szint" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
-          Ágy szint
+          Tárgyasztal szint
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -513,7 +519,7 @@
   
     <li class="md-nav__item">
       <a href="Bed_Level.html" class="md-nav__link">
-        Ágy szintezése
+        Tárgyasztal szintezése
       </a>
     </li>
   
@@ -583,7 +589,7 @@
   
     <li class="md-nav__item">
       <a href="Bed_Mesh.html" class="md-nav__link">
-        Ágyháló
+        Tárgyasztal háló
       </a>
     </li>
   
@@ -597,7 +603,7 @@
   
     <li class="md-nav__item">
       <a href="Endstop_Phase.html" class="md-nav__link">
-        Végállás szakasz
+        Végállás fázis
       </a>
     </li>
   
@@ -1268,6 +1274,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sponsors.html" class="md-nav__link">
+        Szponzorok
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1399,8 +1420,8 @@
 <li><code>config_pwm_out oid=%c pin=%u cycle_ticks=%u value=%hu default_value=%hu max_duration=%u</code> : Ez a parancs létrehoz egy belső objektumot a hardveralapú PWM-tűkhöz, amelyek frissítését a gazdagép be tudja ütemezni. Használata analóg a config_digital_out paranccsal. A paraméterek leírását lásd a 'set_pwm_out' és a 'config_digital_out' parancsok leírásában.</li>
 <li><code>config_analog_in oid=%c pin=%u</code> : Ez a parancs egy tű analóg bemeneti mintavételezési módban történő konfigurálására szolgál. A konfigurálás után a tű rendszeres időközönként mintavételezhető a query_analog_in paranccsal (lásd alább).</li>
 <li><code>config_stepper oid=%c step_pin=%c dir_pin=%c invert_step=%c step_pulse_ticks=%u</code> : Ez a parancs létrehoz egy belső léptető objektumot. A 'step_pin' és 'dir_pin' paraméterek megadják a lépést és irányokat; ez a parancs digitális kimeneti módban konfigurálja őket. Az 'invert_step' paraméter meghatározza, hogy a lépés emelkedő élre (invert_step=0) vagy csökkenő élre (invert_step=1) történjen. A 'step_pulse_ticks' paraméter a lépésimpulzus minimális időtartamát határozza meg. Ha az MCU a 'STEPPER_BOTH_EDGE=1' konstansot exportálja, akkor a step_pulse_ticks=0 és az invert_step=-1 beállítása a step_pin emelkedő és csökkenő éleire történő lépést is beállítja.</li>
-<li><code>config_endstop oid=%c pin=%c pull_up=%c stepper_count=%c</code> : Ez a parancs létrehoz egy belső "endstop" objektumot. Ez a végállási tűk megadására és a "kezdőpont" műveletek engedélyezésére szolgál (lásd alább az endstop_home parancsot). A parancs a megadott tűt digitális bemeneti módban konfigurálja. A 'pull_up' paraméter határozza meg, hogy a hardver által biztosított pullup ellenállások a tűhöz (ha vannak) engedélyezve lesznek-e. A 'stepper_count' paraméter meghatározza a maximális számú steppert, amelyet ennek a végállásnak meg kell állítania egy kezdőpont művelet során (lásd az endstop_home parancsot alább).</li>
-<li><code>config_spi oid=%c bus=%u pin=%u mode=%u rate=%u shutdown_msg=%*s</code> : Ez a parancs létrehoz egy belső SPI objektumot. A spi_transfer és spi_send parancsokkal együtt használható (lásd alább). A "bus" azonosítja a használni kívánt SPI-buszt (ha a mikrokontroller egynél több SPI-busszal rendelkezik). A "pin" az eszköz chipkiválasztó (CS) tűjét határozza meg. A "mode" az SPI módot jelöli (0 és 3 között kell lennie). A "rate" paraméter az SPI-busz sebességét adja meg (másodpercenkénti ciklusokban). Végül a "shutdown_msg" egy SPI-parancs, amelyet az adott eszköznek kell küldeni, ha a mikrokontroller leállási állapotba kerül.</li>
+<li><code>config_endstop oid=%c pin=%c pull_up=%c stepper_count=%c</code> : Ez a parancs létrehoz egy belső "endstop" objektumot. Ez a végállási tűk megadására és a "kezdőpont" műveletek engedélyezésére szolgál (lásd alább az endstop_home parancsot). A parancs a megadott tűt digitális bemeneti módban konfigurálja. A 'pull_up' paraméter határozza meg, hogy a hardver által biztosított pullup ellenállások a tűhöz (ha vannak) engedélyezve lesznek-e. A 'stepper_count' paraméter meghatározza a maximális számú stepper-t, amelyet ennek a végállásnak meg kell állítania egy kezdőpont művelet során (lásd az endstop_home parancsot alább).</li>
+<li><code>config_spi oid=%c bus=%u pin=%u mode=%u rate=%u shutdown_msg=%*s</code> : Ez a parancs létrehoz egy belső SPI objektumot. Az spi_transfer és spi_send parancsokkal együtt használható (lásd alább). A "bus" azonosítja a használni kívánt SPI-buszt (ha a mikrokontroller egynél több SPI-busszal rendelkezik). A "pin" az eszköz chipkiválasztó (CS) tűjét határozza meg. A "mode" az SPI módot jelöli (0 és 3 között kell lennie). A "rate" paraméter az SPI-busz sebességét adja meg (másodpercenkénti ciklusokban). Végül a "shutdown_msg" egy SPI-parancs, amelyet az adott eszköznek kell küldeni, ha a mikrokontroller leállási állapotba kerül.</li>
 <li><code>config_spi_without_cs oid=%c bus=%u mode=%u rate=%u shutdown_msg=%*s</code> : Ez a parancs hasonló a config_spi parancshoz, de CS tű definíció nélkül. Hasznos olyan SPI eszközöknél, amelyek nem rendelkeznek Chip Select vonallal.</li>
 </ul>
 <h2 id="gyakori-parancsok">Gyakori parancsok<a class="headerlink" href="#gyakori-parancsok" title="Permanent link">&para;</a></h2>
@@ -1414,7 +1435,7 @@
 </ul>
 <h3 id="lepteto-parancsok">Léptető parancsok<a class="headerlink" href="#lepteto-parancsok" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>queue_step oid=%c interval=%u count=%hu add=%hi</code> : Ez a parancs ütemezi a 'számítási' lépést az adott léptetőhöz, az 'intervallum' lépések közötti órajellel. Az első lépés az 'intervallum' órajelek száma lesz az adott léptető utolsó ütemezett lépése óta. Ha az 'add' nem nulla, akkor az intervallum minden lépés után az 'add' értékkel módosul. Ez a parancs a megadott intervallum/count/add szekvenciát egy léptetőkénti sorba illeszti. A normál működés során több száz ilyen szekvencia állhat a sorban. Az új szekvenciák a sor végére kerülnek, és amint minden szekvencia teljesíti a 'szám' lépések számát, a sor elejére kerülnek. Ez a rendszer lehetővé teszi a mikrokontroller számára, hogy több százezer lépést állítson sorba. Mindezt megbízható és kiszámítható ütemezési idővel.</li>
+<li><code>queue_step oid=%c interval=%u count=%hu add=%hi</code> : Ez a parancs ütemezi a 'számítási' lépést az adott léptetőhöz, az 'intervallum' lépések közötti órajellel. Az első lépés az 'intervallum' órajelek száma lesz az adott léptető utolsó ütemezett lépése óta. Ha az 'add' nem nulla, akkor az intervallum minden lépés után az 'add' értékkel módosul. Ez a parancs a megadott intervallum/count/add szekvenciát egy léptetőkénti sorba illeszti. A normál működés során több száz ilyen szekvencia állhat a sorban. Az új szekvenciák a sor végére kerülnek, és amint minden szekvencia teljesíti a 'count' lépések számát, a sor elejére kerülnek. Ez a rendszer lehetővé teszi a mikrokontroller számára, hogy több százezer lépést állítson sorba. Mindezt megbízható és kiszámítható ütemezési idővel.</li>
 <li><code>set_next_step_dir oid=%c dir=%c</code> : Ez a parancs adja meg a következő queue_step parancs által használt dir_pin értékét.</li>
 <li><code>reset_step_clock oid=%c clock=%u</code> : Normális esetben a lépés időzítése az adott léptető utolsó lépéséhez viszonyítva történik. Ez a parancs visszaállítja az órajelet, így a következő lépés a megadott 'órajel' időponthoz képest történik. A gazdagép általában csak a nyomtatás kezdetén küldi ezt a parancsot.</li>
 <li><code>stepper_get_position oid=%c</code> : E parancs hatására a mikrokontroller egy "stepper_position" válaszüzenetet generál a léptető aktuális pozíciójával. A pozíció a dir=1-gyel generált lépések teljes száma mínusz a dir=0-val generált lépések teljes száma.</li>

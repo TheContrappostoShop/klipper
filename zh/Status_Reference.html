@@ -169,6 +169,12 @@
                   </a>
                 </li>
                 
+                <li class="md-select__item">
+                  <a href="/it/" hreflang="it" class="md-select__link">
+                    Italiano
+                  </a>
+                </li>
+                
             </ul>
           </div>
         </div>
@@ -798,6 +804,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bed_screws" class="md-nav__link">
+    bed_screws
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configfile" class="md-nav__link">
     configfile
   </a>
@@ -821,6 +834,13 @@
         <li class="md-nav__item">
   <a href="#exclude_object" class="md-nav__link">
     exclude_object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extruder_stepper" class="md-nav__link">
+    extruder_stepper
   </a>
   
 </li>
@@ -898,6 +918,13 @@
         <li class="md-nav__item">
   <a href="#led" class="md-nav__link">
     led
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual_probe" class="md-nav__link">
+    manual_probe
   </a>
   
 </li>
@@ -1036,6 +1063,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#z_thermal_adjust" class="md-nav__link">
+    z_thermal_adjust
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#z_tilt" class="md-nav__link">
     z_tilt
   </a>
@@ -1121,7 +1155,7 @@
   
     <li class="md-nav__item">
       <a href="Exclude_Object.html" class="md-nav__link">
-        Exclude Objects
+        排除对象
       </a>
     </li>
   
@@ -1468,6 +1502,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sponsors.html" class="md-nav__link">
+        赞助
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1509,6 +1558,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bed_screws" class="md-nav__link">
+    bed_screws
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configfile" class="md-nav__link">
     configfile
   </a>
@@ -1532,6 +1588,13 @@
         <li class="md-nav__item">
   <a href="#exclude_object" class="md-nav__link">
     exclude_object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extruder_stepper" class="md-nav__link">
+    extruder_stepper
   </a>
   
 </li>
@@ -1609,6 +1672,13 @@
         <li class="md-nav__item">
   <a href="#led" class="md-nav__link">
     led
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual_probe" class="md-nav__link">
+    manual_probe
   </a>
   
 </li>
@@ -1747,6 +1817,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#z_thermal_adjust" class="md-nav__link">
+    z_thermal_adjust
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#z_tilt" class="md-nav__link">
     z_tilt
   </a>
@@ -1783,6 +1860,14 @@
 <ul>
 <li><code>profile_name</code>、<code>mesh_min</code>、<code>mesh_max</code>、<code>probed_matrix</code>、<code>mesh_matrix</code>：关于当前活跃的 bed_mesh 配置信息。</li>
 <li><code>profiles</code>：当前定义的配置，使用 BED_MESH_PROFILE 进行设置。</li>
+</ul>
+<h2 id="bed_screws">bed_screws<a class="headerlink" href="#bed_screws" title="Permanent link">&para;</a></h2>
+<p><code>Config_Reference.md#bed_screws</code> 对象中提供了以下信息：</p>
+<ul>
+<li><code>is_active</code>：如果床调平螺丝调整工具当前处于活动状态，则返回 True。</li>
+<li><code>state</code>：床调平螺丝调整工具状态。它可以是以下字符串之一："adjust", "fine"。</li>
+<li><code>current_screw</code>：当前正在被调整的螺丝的索引。</li>
+<li><code>accepted_screws</code>：已被接受的螺丝数量。</li>
 </ul>
 <h2 id="configfile">configfile<a class="headerlink" href="#configfile" title="Permanent link">&para;</a></h2>
 <p><code>configfile</code> 对象中提供了以下信息（该对象始终可用）：</p>
@@ -1838,6 +1923,12 @@
 <ul>
 <li><code>excluded_objects</code>：列出已排除对象名称的字符串数组。</li>
 <li><code>current_object</code>：当前正在打印的对象的名称。</li>
+</ul>
+<h2 id="extruder_stepper">extruder_stepper<a class="headerlink" href="#extruder_stepper" title="Permanent link">&para;</a></h2>
+<p>以下信息在extruder_stepper对象以及<a href="Config_Reference.html#extruder">extruder</a>对象中可用：</p>
+<ul>
+<li><code>pressure_advance</code>：当前的<a href="Pressure_Advance.html">压力提前</a>值。</li>
+<li><code>smooth_time</code>：当前压力提前平滑时间。</li>
 </ul>
 <h2 id="fan">fan<a class="headerlink" href="#fan" title="Permanent link">&para;</a></h2>
 <p><a href="Config_Reference.html#fan">fan</a>、<a href="Config_Reference.html#heater_fan">heater_fan some_name</a>和<a href="Config_Reference.html#controller_fan">controller_fan some_name</a>对象提供了以下信息：</p>
@@ -1911,6 +2002,14 @@
 <ul>
 <li><code>color_data</code>：一个包含链中每个LED的RGBW值的颜色列表的列表。每个值都以0.0到1.0的浮点数表示。每个颜色列表包含4个项目（红、绿、蓝、白），即使底层的LED支持较少的颜色通道。例如，可以通过<code>printer["neopixel &lt;配置名&gt;"].color_data[1][2]</code>访问链中第二个neopixel的蓝色值（颜色列表中的第三项）。</li>
 </ul>
+<h2 id="manual_probe">manual_probe<a class="headerlink" href="#manual_probe" title="Permanent link">&para;</a></h2>
+<p><code>manual_probe</code> 对象中提供了以下信息：</p>
+<ul>
+<li><code>is_active</code>：如果手动探测助手程序脚本当前处于活动状态，则返回 True。</li>
+<li><code>z_position</code> 。喷嘴的当前高度（按照打印机目前的理解）。</li>
+<li><code>z_position_lower</code>：上次探测尝试略低于当前高度。</li>
+<li><code>z_position_upper</code>：上次探测尝试仅大于当前高度。</li>
+</ul>
 <h2 id="mcu">mcu<a class="headerlink" href="#mcu" title="Permanent link">&para;</a></h2>
 <p><a href="Config_Reference.html#mcu">mcu</a>和<a href="Config_Reference.html#mcu-my_extra_mcu">mcu some_name</a>对象提供了以下信息：</p>
 <ul>
@@ -1947,6 +2046,8 @@
 <p><code>print_stats</code> 对象提供了以下信息（如果定义了 <a href="Config_Reference.html#virtual_sdcard">virtual_sdcard</a> 配置分段，则此对象自动可用）：</p>
 <ul>
 <li><code>filename</code>、<code>total_duration</code>、<code>print_duration</code>、<code>filament_used</code>、<code>state</code>、<code>message</code>：virtual_sdcard 打印处于活动状态时有关当前打印的估测。</li>
+<li><code>info.total_layer</code>: The total layer value of the last <code>SET_PRINT_STATS_INFO TOTAL_LAYER=&lt;value&gt;</code> G-Code command.</li>
+<li><code>info.current_layer</code>: The current layer value of the last <code>SET_PRINT_STATS_INFO CURRENT_LAYER=&lt;value&gt;</code> G-Code command.</li>
 </ul>
 <h2 id="probe">probe<a class="headerlink" href="#probe" title="Permanent link">&para;</a></h2>
 <p><a href="Config_Reference.html#probe">probe</a> 对象中提供了以下信息（如果定义了 <a href="Config_Reference.html#bltouch">bltouch</a> 配置分段，则此对象也可用）：</p>
@@ -2009,6 +2110,7 @@
 <li><code>extruder</code>：当前活跃的挤出机的名称。例如，在宏中可以使用<code>printer[printer.toolhead.extruder].target</code>来获取当前挤出机的目标温度。</li>
 <li><code>homed_axes</code>：当前被认为处于“已归位”状态的车轴。这是一个包含一个或多个"x"、"y"、"z"的字符串。</li>
 <li><code>axis_minimum</code>、<code>axis_maximum</code>：归位后的轴的行程限制（毫米）。可以访问此极限值的 x、y、z 分量（例如，<code>axis_minimum.x</code>、<code>axis_maximum.z</code>）。</li>
+<li>对于三角洲打印机，<code>cone_start_z</code> 是最大半径时的最大z高度(<code>printer.toolhead.cone_start_z</code>)。</li>
 <li><code>max_velocity</code>、<code>max_accel</code>、<code>max_accel_to_decel</code>和<code>square_corner_velocity</code>：当前生效的打印机限制。如果 <code>SET_VELOCITY_LIMIT</code>（或 <code>M204</code>）命令在运行时改变它们，这些值可能与配置文件设置不同。</li>
 <li><code>stalls</code>：由于工具头移动速度快于从 G 代码输入读取的移动速度，因此打印机必须暂停的总次数（自上次重新启动以来）。</li>
 </ul>
@@ -2032,6 +2134,16 @@
 <ul>
 <li><code>state</code>：返回一个表示当前 Klipper 状态的字符串。可能的值为："ready"、"startup"、"shutdown"和"error"。</li>
 <li><code>state_message</code>：提供了一个包含当前 Klipper 状态和上下文的可读字符串。</li>
+</ul>
+<h2 id="z_thermal_adjust">z_thermal_adjust<a class="headerlink" href="#z_thermal_adjust" title="Permanent link">&para;</a></h2>
+<p>The following information is available in the <code>z_thermal_adjust</code> object (this object is available if <a href="Config_Reference.html#z_thermal_adjust">z_thermal_adjust</a> is defined).</p>
+<ul>
+<li><code>enabled</code>: Returns True if adjustment is enabled.</li>
+<li><code>temperature</code>: Current (smoothed) temperature of the defined sensor. [degC]</li>
+<li><code>measured_min_temp</code>: Minimum measured temperature. [degC]</li>
+<li><code>measured_max_temp</code>: Maximum measured temperature. [degC]</li>
+<li><code>current_z_adjust</code>: Last computed Z adjustment [mm].</li>
+<li><code>z_adjust_ref_temperature</code>: Current reference temperature used for calculation of Z <code>current_z_adjust</code> [degC].</li>
 </ul>
 <h2 id="z_tilt">z_tilt<a class="headerlink" href="#z_tilt" title="Permanent link">&para;</a></h2>
 <p><code>z_tilt</code> 对象提供了以下信息（如果定义了 z_tilt，则该对象可用）：</p>

@@ -169,6 +169,12 @@
                   </a>
                 </li>
                 
+                <li class="md-select__item">
+                  <a href="/it/" hreflang="it" class="md-select__link">
+                    Italiano
+                  </a>
+                </li>
+                
             </ul>
           </div>
         </div>
@@ -495,14 +501,14 @@
       
       
         <label class="md-nav__link" for="__nav_7_4">
-          Ágy szint
+          Tárgyasztal szint
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Ágy szint" data-md-level="2">
+      <nav class="md-nav" aria-label="Tárgyasztal szint" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
-          Ágy szint
+          Tárgyasztal szint
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -513,7 +519,7 @@
   
     <li class="md-nav__item">
       <a href="Bed_Level.html" class="md-nav__link">
-        Ágy szintezése
+        Tárgyasztal szintezése
       </a>
     </li>
   
@@ -583,7 +589,7 @@
   
     <li class="md-nav__item">
       <a href="Bed_Mesh.html" class="md-nav__link">
-        Ágyháló
+        Tárgyasztal háló
       </a>
     </li>
   
@@ -597,7 +603,7 @@
   
     <li class="md-nav__item">
       <a href="Endstop_Phase.html" class="md-nav__link">
-        Végállás szakasz
+        Végállás fázis
       </a>
     </li>
   
@@ -1322,6 +1328,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sponsors.html" class="md-nav__link">
+        Szponzorok
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1489,7 +1510,7 @@ queue_step oid=7 interval=7458 count=10 add=331
 queue_step oid=7 interval=11717 count=4 add=1281
 </code></pre></div>
 
-<p>Az elérhető parancsokról az <a href="MCU_Commands.html">mcu parancsok</a> dokumentumban olvashat bővebben. Tekintse meg a <a href="Debugging.html">hibakeresés</a> dokumentumot a G-kód fájl megfelelő, ember által olvasható mikrovezérlő parancsaira történő lefordításával kapcsolatban.</p>
+<p>Az elérhető parancsokról az <a href="MCU_Commands.html">mcu parancsok</a> dokumentumban olvashatsz bővebben. Tekintsd meg a <a href="Debugging.html">hibakeresés</a> dokumentumot a G-kód fájl megfelelő, ember által olvasható mikrovezérlő parancsaira történő lefordításával kapcsolatban.</p>
 <p>Ez az oldal magának a Klipper üzenetküldő protokollnak a magas szintű leírását tartalmazza. Leírja az üzenetek deklarálását, bináris formátumú kódolását (a séma "tömörítését") és továbbítását.</p>
 <p>A protokoll célja, hogy hibamentes kommunikációs csatornát tegyen lehetővé a gazdagép és a mikrovezérlő között, amely alacsony késleltetésű, alacsony sávszélességű és alacsony bonyolultságú a mikrovezérlő számára.</p>
 <h2 id="mikrovezerlo-interfesz">Mikrovezérlő interfész<a class="headerlink" href="#mikrovezerlo-interfesz" title="Permanent link">&para;</a></h2>
@@ -1509,7 +1530,7 @@ queue_step oid=7 interval=11717 count=4 add=1281
 
 <p>A fenti egy "állapot" válaszüzenetet küld, amely két egész paramétert ("óra" és "állapot") tartalmaz. A mikrovezérlő szerkesztő automatikusan megtalálja az összes sendf() hívást, és kódolókat generál hozzájuk. A sendf() függvény első paramétere írja le a választ, és formátuma megegyezik a parancsdeklarációkkal.</p>
 <p>A gazdagép gondoskodhat arról, hogy minden válaszhoz visszahívási funkciót regisztráljon. Tehát valójában a parancsok lehetővé teszik a gazdagép számára, hogy meghívja a C függvényeket a mikrovezérlőben, a válaszok pedig lehetővé teszik, hogy a mikrovezérlő szoftvere kódot hívjon meg a gazdagépben.</p>
-<p>A sendf() makró csak parancs vagy feladatkezelőkből hívható meg, és nem hívható meg megszakításokból vagy időzítőkből. A kódnak nem kell sendf()-t kiadnia a kapott parancsra válaszul, nincs korlátozva a sendf() meghívásának száma, és a sendf()-t bármikor meghívhatja egy feladatkezelőből.</p>
+<p>A sendf() makró csak parancs vagy feladatkezelőkből hívható meg, és nem hívható meg megszakításokból vagy időzítőkből. A kódnak nem kell sendf()-t kiadnia a kapott parancsra válaszul, nincs korlátozva a sendf() meghívásának száma, és a sendf()-t bármikor meghívhatod egy feladatkezelőből.</p>
 <h4 id="kimeneti-valaszok">Kimeneti válaszok<a class="headerlink" href="#kimeneti-valaszok" title="Permanent link">&para;</a></h4>
 <p>A hibakeresés egyszerűsítése érdekében van egy output() C függvény is. Például:</p>
 <div class="highlight"><pre><span></span><code>output(&quot;The value of %u is %s with size %u.&quot;, x, buf, buf_len);
@@ -1523,14 +1544,14 @@ queue_step oid=7 interval=11717 count=4 add=1281
 DECL_ENUMERATION_RANGE(&quot;pin&quot;, &quot;PC0&quot;, 16, 8);
 </code></pre></div>
 
-<p>Ha az első példában a DECL_ENUMERATION() makró felsorolást definiál minden olyan parancs/válasz üzenethez, amelynek paraméterneve "spi_bus" vagy "_spi_bus" utótaggal rendelkezik. E paraméterek esetében az "SPI" karakterlánc érvényes érték, és nullás egész számértékkel kerül továbbításra.</p>
+<p>Ha az első példa, a DECL_ENUMERATION() makró felsorolást határoz meg minden olyan parancs/válasz üzenethez, amelynek paraméterneve "spi_bus" vagy "_spi_bus" utótag, e paraméterek esetében az "SPI" karakterlánc érvényes érték, és nullás egész számértékkel kerül továbbításra.</p>
 <p>Lehetőség van felsorolási tartomány kijelölésére is. A második példában egy "pin" paraméter (vagy bármely paraméter, amelynek utótagja "_pin") elfogadná a PC0, PC1, PC2, ..., PC7 értékeket. A karakterláncokat a 16, 17, 18, ..., ..., 23 egész számokkal kell továbbítani.</p>
 <h3 id="allandok-deklaralasa">Állandók deklarálása<a class="headerlink" href="#allandok-deklaralasa" title="Permanent link">&para;</a></h3>
 <p>A konstansok is exportálhatók. Például a következőképp:</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT(&quot;SERIAL_BAUD&quot;, 250000);
 </code></pre></div>
 
-<p>egy "SERIAL_BAUD" nevű, 250000 értékű konstanst exportálna a mikrokontrollerből a gazdagépre. Lehetőség van olyan konstans deklarálására is, amely egy karakterlánc - például:</p>
+<p>egy "SERIAL_BAUD" nevű, 250000 értékű konstanst exportálnál a mikrokontrollerből a gazdagépre. Lehetőség van olyan konstans deklarálására is, amely egy karakterlánc - például:</p>
 <div class="highlight"><pre><span></span><code>DECL_CONSTANT_STR(&quot;MCU&quot;, &quot;pru&quot;);
 </code></pre></div>
 

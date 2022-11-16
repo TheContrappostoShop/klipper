@@ -169,6 +169,12 @@
                   </a>
                 </li>
                 
+                <li class="md-select__item">
+                  <a href="/it/" hreflang="it" class="md-select__link">
+                    Italiano
+                  </a>
+                </li>
+                
             </ul>
           </div>
         </div>
@@ -497,14 +503,14 @@
       
       
         <label class="md-nav__link" for="__nav_7_4">
-          Ágy szint
+          Tárgyasztal szint
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Ágy szint" data-md-level="2">
+      <nav class="md-nav" aria-label="Tárgyasztal szint" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
-          Ágy szint
+          Tárgyasztal szint
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -515,7 +521,7 @@
   
     <li class="md-nav__item">
       <a href="Bed_Level.html" class="md-nav__link">
-        Ágy szintezése
+        Tárgyasztal szintezése
       </a>
     </li>
   
@@ -585,7 +591,7 @@
   
     <li class="md-nav__item">
       <a href="Bed_Mesh.html" class="md-nav__link">
-        Ágyháló
+        Tárgyasztal háló
       </a>
     </li>
   
@@ -599,7 +605,7 @@
   
     <li class="md-nav__item">
       <a href="Endstop_Phase.html" class="md-nav__link">
-        Végállás szakasz
+        Végállás fázis
       </a>
     </li>
   
@@ -798,6 +804,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bed_screws" class="md-nav__link">
+    bed_screws
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configfile" class="md-nav__link">
     configfile
   </a>
@@ -821,6 +834,13 @@
         <li class="md-nav__item">
   <a href="#exclude_object" class="md-nav__link">
     exclude_object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extruder_stepper" class="md-nav__link">
+    extruder_stepper
   </a>
   
 </li>
@@ -898,6 +918,13 @@
         <li class="md-nav__item">
   <a href="#led" class="md-nav__link">
     led
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual_probe" class="md-nav__link">
+    manual_probe
   </a>
   
 </li>
@@ -1031,6 +1058,13 @@
         <li class="md-nav__item">
   <a href="#webhooks" class="md-nav__link">
     webhooks
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#z_thermal_adjust" class="md-nav__link">
+    z_thermal_adjust
   </a>
   
 </li>
@@ -1468,6 +1502,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sponsors.html" class="md-nav__link">
+        Szponzorok
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1509,6 +1558,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#bed_screws" class="md-nav__link">
+    bed_screws
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#configfile" class="md-nav__link">
     configfile
   </a>
@@ -1532,6 +1588,13 @@
         <li class="md-nav__item">
   <a href="#exclude_object" class="md-nav__link">
     exclude_object
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extruder_stepper" class="md-nav__link">
+    extruder_stepper
   </a>
   
 </li>
@@ -1609,6 +1672,13 @@
         <li class="md-nav__item">
   <a href="#led" class="md-nav__link">
     led
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manual_probe" class="md-nav__link">
+    manual_probe
   </a>
   
 </li>
@@ -1747,6 +1817,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#z_thermal_adjust" class="md-nav__link">
+    z_thermal_adjust
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#z_tilt" class="md-nav__link">
     z_tilt
   </a>
@@ -1772,7 +1849,7 @@
 
 <h1 id="allapot-referencia">Állapot referencia<a class="headerlink" href="#allapot-referencia" title="Permanent link">&para;</a></h1>
 <p>Ez a dokumentum a Klipper <a href="Command_Templates.html">makrók</a>, <a href="Config_Reference.html#display">megjelenítési mezők</a> és az <a href="API_Server.html">API Szerver</a> segítségével elérhető nyomtató állapotinformációk referenciája.</p>
-<p>Az ebben a dokumentumban szereplő mezők változhatnak. Ha egy attribútumot használ, a Klipper szoftver frissítésekor mindenképpen nézze át a <a href="Config_Changes.html">Konfigurációs változások dokumentumot</a>.</p>
+<p>Az ebben a dokumentumban szereplő mezők változhatnak. Ha egy attribútumot használsz, a Klipper szoftver frissítésekor mindenképpen nézd át a <a href="Config_Changes.html">Konfigurációs változások dokumentumot</a>.</p>
 <h2 id="angle">angle<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h2>
 <p>A következő információk az <a href="Config_Reference.html#angle">angle some_name</a> objektumban érhetők el:</p>
 <ul>
@@ -1784,11 +1861,19 @@
 <li><code>profile_name</code>, <code>mesh_min</code>, <code>mesh_max</code>, <code>probed_matrix</code>, <code>mesh_matrix</code>: Az aktuálisan aktív bed_mesh-re vonatkozó információk.</li>
 <li><code>profiles</code>: A BED_MESH_PROFILE használatával beállított, jelenleg definiált profilok halmaza.</li>
 </ul>
+<h2 id="bed_screws">bed_screws<a class="headerlink" href="#bed_screws" title="Permanent link">&para;</a></h2>
+<p>A következő információk a <code>Config_Reference.md#bed_screws</code> objektumban találhatók:</p>
+<ul>
+<li><code>is_active</code>: True értéket ad vissza, ha a tárgyasztal csavarok beállítási eszköze jelenleg aktív.</li>
+<li><code>state</code>: A tárgyasztal csavarok beállítási szerszámának állapota. A következő karakterláncok egyike: "adjust", "fine".</li>
+<li><code>current_screw</code>: Az aktuálisan beállított csavar indexe.</li>
+<li><code>accepted_screws</code>: Az elfogadott csavarok száma.</li>
+</ul>
 <h2 id="configfile">configfile<a class="headerlink" href="#configfile" title="Permanent link">&para;</a></h2>
 <p>A következő információk a <code>configfile</code> objektumban találhatók (ez az objektum mindig elérhető):</p>
 <ul>
 <li><code>settings.&lt;section&gt;.&lt;option&gt;</code>: Visszaadja az adott konfigurációs fájl beállítását (vagy alapértelmezett értékét) a szoftver utolsó indítása vagy újraindítása során. (A használat közben megváltoztatott beállítások nem jelennek meg itt.)</li>
-<li><code>config.&lt;section&gt;.&lt;option&gt;</code>: Visszaadja az adott nyers konfigurációs fájl beállítását, ahogyan azt a Klipper a legutóbbi szoftverindítás vagy újraindítás során beolvasta. (A működés közben megváltoztatott beállítások nem jelennek meg itt.) Minden értéket stringként ad vissza.</li>
+<li><code>config.&lt;section&gt;.&lt;option&gt;</code>: Visszaadja az adott nyers konfigurációs fájl beállítását, ahogyan azt a Klipper a legutóbbi szoftverindítás vagy újraindítás során beolvasta. (A működés közben megváltoztatott beállítások nem jelennek meg itt.) Minden értéket string-ként ad vissza.</li>
 <li><code>save_config_pending</code>: True értéket ad, ha vannak olyan frissítések, amelyeket a <code>SAVE_CONFIG</code> parancs a lemezen is megőrizhet.</li>
 <li><code>save_config_pending_items</code>: Tartalmazza azokat a szakaszokat és opciókat, amelyeket megváltoztattak, és amelyeket egy <code>SAVE_CONFIG</code> elmenthetne.</li>
 <li><code>figyelmeztetések</code>: A konfigurációs beállításokkal kapcsolatos figyelmeztetések listája. A lista minden egyes bejegyzése egy szótár lesz, amely tartalmaz egy <code>type</code> és egy <code>message</code> mezőt (mindkettő karakterlánc). A figyelmeztetés típusától függően további mezők is rendelkezésre állhatnak.</li>
@@ -1796,7 +1881,7 @@
 <h2 id="display_status">display_status<a class="headerlink" href="#display_status" title="Permanent link">&para;</a></h2>
 <p>A következő információk a <code>display_status</code> objektumban érhetők el (ez az objektum automatikusan elérhető, ha a <a href="Config_Reference.html#display">kijelző</a> konfigurációs szakasz definiálva van):</p>
 <ul>
-<li><code>progress</code>: A legutóbbi <code>M73</code> G-kód parancs progress értéke (vagy <code>virtual_sdcard.progress</code>, ha nem érkezett legutóbbi <code>M73</code>).</li>
+<li><code>progress</code>: A legutóbbi <code>M73</code> G-kód parancs előrehaladási érték (vagy <code>virtual_sdcard.progress</code>, ha nem érkezett legutóbbi <code>M73</code>).</li>
 <li><code>message</code>: Az utolsó <code>M117</code> G-kódú parancsban szereplő üzenet.</li>
 </ul>
 <h2 id="endstop_phase">endstop_phase<a class="headerlink" href="#endstop_phase" title="Permanent link">&para;</a></h2>
@@ -1839,10 +1924,16 @@
 <li><code>excluded_objects</code>: A kizárt objektumok neveit felsoroló karakterláncok tömbje.</li>
 <li><code>current_object</code>: Az aktuálisan nyomtatott objektum neve.</li>
 </ul>
+<h2 id="extruder_stepper">extruder_stepper<a class="headerlink" href="#extruder_stepper" title="Permanent link">&para;</a></h2>
+<p>Az alábbi információk az extruder_stepper objektumok (valamint az <a href="Config_Reference.html#extruder">extruder</a> objektumok) esetében állnak rendelkezésre:</p>
+<ul>
+<li><code>pressure_advance</code>: Az aktuális <a href="Pressure_Advance.html">nyomás előtolás</a> érték.</li>
+<li><code>smooth_time</code>: Az aktuális nyomás előtolásának simítási ideje.</li>
+</ul>
 <h2 id="fan">fan<a class="headerlink" href="#fan" title="Permanent link">&para;</a></h2>
 <p>A következő információk a <a href="Config_Reference.html#fan">ventilátor</a>, <a href="Config_Reference.html#heater_fan">heater_fan some_name</a> és <a href="Config_Reference.html#controller_fan">controller_fan some_name</a> objektumokban érhetők el:</p>
 <ul>
-<li><code>speed</code>: A ventilátor fordulatszáma lebegőértékként 0.0 és 1.0 között.</li>
+<li><code>speed</code>: A ventilátor fordulatszáma lebegőértékben 0.0 és 1.0 között.</li>
 <li><code>rpm</code>: A ventilátor mért fordulatszáma percenkénti fordulatszámban, ha a ventilátor rendelkezik tachometer_pin kimenettel.</li>
 </ul>
 <h2 id="filament_switch_sensor">filament_switch_sensor<a class="headerlink" href="#filament_switch_sensor" title="Permanent link">&para;</a></h2>
@@ -1873,7 +1964,7 @@
 <li><code>gcode_position</code>: A nyomtatófej aktuális pozíciója az aktuális G-kód origóhoz képest. Vagyis olyan pozíciók, amelyeket közvetlenül egy <code>G1</code> parancsnak küldhetünk. Lehetőség van e pozíció X, Y, Z és az E, komponensének elérésére (pl. <code>gcode_position.x</code>).</li>
 <li><code>position</code>: A nyomtatófej utolsó kiadott pozíciója a konfigurációs fájlban megadott koordináta rendszerrel. Lehetőség van ennek a pozíciónak az X, Y, Z és az E, komponenséhez hozzáférni (pl. <code>position.x</code>).</li>
 <li><code>homing_origin</code>: A G-kód koordináta rendszer origója (a config fájlban megadott koordináta rendszerhez képest), amelyet a <code>G28</code> parancs után használni kell. A <code>SET_GCODE_OFFSET</code> parancs megváltoztathatja ezt a pozíciót. Lehetőség van ennek a pozíciónak az X, Y és Z komponenséhez hozzáférni (pl. <code>homing_origin.x</code>).</li>
-<li><code>speed</code>: Az utolsó, <code>G1</code> parancsban beállított sebesség (mm/mp-ben).</li>
+<li><code>speed</code>: Az utolsó, <code>G1</code> parancsban beállított sebesség (mm/sec-ben).</li>
 <li><code>speed_factor</code>: Az <code>M220</code> parancs által beállított "sebességtényező felülbírálása". Ez egy lebegőpontos érték, így 1.0 azt jelenti, hogy nincs felülbírálat, és például a 2.0 megduplázza a kért sebességet.</li>
 <li><code>extrude_factor</code>: Az <code>M221</code> parancs által beállított "extrude factor override". Ez egy lebegőpontos érték, így 1.0 azt jelenti, hogy nincs felülbírálat, és például a 2.0 megduplázza a kért extrudálásokat.</li>
 <li><code>absolute_coordinates</code>: True értéket ad, ha a <code>G90</code> abszolút koordináta módban van, vagy False értéket, ha a <code>G91</code> relatív módban van.</li>
@@ -1889,8 +1980,8 @@
 <h2 id="heater">heater<a class="headerlink" href="#heater" title="Permanent link">&para;</a></h2>
 <p>A következő információk az olyan fűtőelemekhez állnak rendelkezésre, mint az <a href="Config_Reference.html#extruder">extruder</a>, <a href="Config_Reference.html#heater_bed">heater_bed</a> és <a href="Config_Reference.html#heater_generic">heater_generic</a>:</p>
 <ul>
-<li><code>temperature</code>: Az adott fűtőberendezés legutóbb jelentett hőmérséklete (Celsiusban, lebegőértékként).</li>
-<li><code>target</code>: Az adott fűtőberendezés aktuális célhőmérséklete (Celsiusban, lebegőértékként).</li>
+<li><code>temperature</code>: Az adott fűtőberendezés legutóbb jelentett hőmérséklete (Celsiusban, lebegőértékben).</li>
+<li><code>target</code>: Az adott fűtőberendezés aktuális célhőmérséklete (Celsiusban, lebegőértékben).</li>
 <li><code>power</code>: A fűtőtesthez tartozó PWM-tű utolsó értéke (0,0 és 1,0 közötti érték).</li>
 <li><code>can_extrude</code>: Ha az extruder tud extrudálni (<code>min_extrude_temp</code> határozza meg), csak az <a href="Config_Reference.html#extruder">extruder</a> esetében elérhető</li>
 </ul>
@@ -1909,7 +2000,15 @@
 <h2 id="led">led<a class="headerlink" href="#led" title="Permanent link">&para;</a></h2>
 <p>A következő információk állnak rendelkezésre minden egyes <code>[led led_name]</code>, <code>[neopixel led_name</code> esetében, <code>[dotstar led_name]</code>, <code>[pca9533 led_name]</code>, és <code>[pca9632 led_name]</code> a nyomtatóban meghatározott printer.cfg fájlban:</p>
 <ul>
-<li><code>color_data</code>: A láncban lévő ledek RGBW értékeit tartalmazó színlisták listája. Minden értéket 0,0 és 1,0 közötti lebegőértékként ábrázolunk. Minden színlista 4 elemet tartalmaz (piros, zöld, kék, fehér), még akkor is, ha az alatta lévő LED kevesebb színcsatornát támogat. Például a lánc második neopixelének kék értéke (a színlista 3. eleme) a <code>printer["neopixel &lt;config_name&gt;"].color_data[1][2]</code> címen érhető el.</li>
+<li><code>color_data</code>: A láncban lévő ledek RGBW értékeit tartalmazó színlisták listája. Minden értéket 0,0 és 1,0 közötti lebegőértékben ábrázolunk. Minden színlista 4 elemet tartalmaz (piros, zöld, kék, fehér), még akkor is, ha az alatta lévő LED kevesebb színcsatornát támogat. Például a lánc második neopixelének kék értéke (a színlista 3. eleme) a <code>printer["neopixel &lt;config_name&gt;"].color_data[1][2]</code> címen érhető el.</li>
+</ul>
+<h2 id="manual_probe">manual_probe<a class="headerlink" href="#manual_probe" title="Permanent link">&para;</a></h2>
+<p>A következő információk a <code>manual_probe</code> objektumban találhatók:</p>
+<ul>
+<li><code>is_active</code>: True értéket ad vissza, ha egy kézi mérési segédszkript jelenleg aktív.</li>
+<li><code>z_position</code>: A fúvóka aktuális magassága (ahogyan azt a nyomtató jelenleg értelmezi).</li>
+<li><code>z_position_lower</code>: Az utolsó mérés kísérlet éppen az aktuális magasságnál alacsonyabb.</li>
+<li><code>z_position_upper</code>: Az utolsó mérés kísérlet éppen nagyobb, mint az aktuális magasság.</li>
 </ul>
 <h2 id="mcu">mcu<a class="headerlink" href="#mcu" title="Permanent link">&para;</a></h2>
 <p>A következő információk az <a href="Config_Reference.html#mcu">mcu</a> és <a href="Config_Reference.html#mcu-my_extra_mcu">mcu some_name</a> objektumokban érhetők el:</p>
@@ -1923,8 +2022,8 @@
 <p>A következő információk a <code>motion_report</code> objektumban érhetők el (ez az objektum automatikusan elérhető, ha bármilyen stepper konfigurációs szakasz definiálva van):</p>
 <ul>
 <li><code>live_position</code>: A nyomtatófej kért pozíciója az aktuális időre interpolálva.</li>
-<li><code>live_velocity</code>: A nyomtatófej kért sebessége (mm/mp-ben) az aktuális időpontban.</li>
-<li><code>live_extruder_velocity</code>: A kért extruder sebesség (mm/mp-ben) az aktuális időpontban.</li>
+<li><code>live_velocity</code>: A nyomtatófej kért sebessége (mm/sec-ben) az aktuális időpontban.</li>
+<li><code>live_extruder_velocity</code>: A kért extruder sebesség (mm/sec-ben) az aktuális időpontban.</li>
 </ul>
 <h2 id="output_pin">output_pin<a class="headerlink" href="#output_pin" title="Permanent link">&para;</a></h2>
 <p>A következő információk a <a href="Config_Reference.html#output_pin">output_pin some_name</a> objektumokban érhetők el:</p>
@@ -1947,6 +2046,8 @@
 <p>A következő információk a <code>print_stats</code> objektumban érhetők el (ez az objektum automatikusan elérhető, ha a <a href="Config_Reference.html#virtual_sdcard">virtual_sdcard</a> config szakasz definiálva van):</p>
 <ul>
 <li><code>filename</code>, <code>total_duration</code>, <code>print_duration</code>, <code>filament_used</code>, <code>state</code>, <code>message</code>: Becsült információ az aktuális nyomtatásról, ha egy virtual_sdcard nyomtatás aktív.</li>
+<li><code>info.total_layer</code>: Az utolsó <code>SET_PRINT_STATS_INFO TOTAL_LAYER=&lt;value&gt;</code> G-kódú parancs.</li>
+<li><code>info.current_layer</code>: Az aktuális réteg értéke az utolsó <code>SET_PRINT_STATS_INFO CURRENT_LAYER=&lt;value&gt;</code> G-kódú parancs.</li>
 </ul>
 <h2 id="probe">probe<a class="headerlink" href="#probe" title="Permanent link">&para;</a></h2>
 <p>A következő információk a <a href="Config_Reference.html#probe">szonda</a> objektumban érhetők el (ez az objektum akkor is elérhető, ha egy <a href="Config_Reference.html#bltouch">bltouch</a> konfigurációs szakasz van definiálva):</p>
@@ -2009,6 +2110,7 @@
 <li><code>extruder</code>: A jelenleg aktív extruder neve. Például egy makróban használhatjuk a <code>printer[printer.toolhead.extruder].target</code> parancsot, hogy megkapjuk az aktuális extruder célhőmérsékletét.</li>
 <li><code>homed_axes</code>: Az aktuálisan "homed" állapotban lévőnek tekintett cartesian tengelyek. Ez egy karakterlánc, amely egy vagy több "X", "Y", "Z" értéket tartalmaz.</li>
 <li><code>axis_minimum</code>, <code>axis_maximum</code>: A tengely mozgásának határai (mm) a kezdőpont felvétel után. Lehetőség van e határérték X, Y, Z összetevőinek elérésére (pl. <code>axis_minimum.x</code>, <code>axis_maximum.z</code>).</li>
+<li>A Delta nyomtatók esetében a <code>cone_start_z</code> a maximális sugaraknál mért maximális Z magasság (<code>printer.toolhead.cone_start_z</code>).</li>
 <li><code>max_velocity</code>, <code>max_accel</code>, <code>max_accel_to_decel</code>, <code>square_corner_velocity</code>: Az aktuálisan érvényben lévő nyomtatási korlátok. Ez eltérhet a konfigurációs fájl beállításaitól, ha a <code>SET_VELOCITY_LIMIT</code> (vagy <code>M204</code>) parancs megváltoztatja azokat használat közben.</li>
 <li><code>stalls</code>: Az összes alkalom száma (az utolsó újraindítás óta), amikor a nyomtatót szüneteltetni kellett, mert a nyomtatófej gyorsabban mozgott, mint ahány mozdulatot a G-kód bemenetről be lehetett olvasni.</li>
 </ul>
@@ -2032,6 +2134,16 @@
 <ul>
 <li><code>state</code>: A Klipper aktuális állapotát jelző karakterláncot adja vissza. A lehetséges értékek: "ready", "startup", "shutdown", "error".</li>
 <li><code>state_message</code>: Egy ember által olvasható karakterlánc, amely további kontextust ad az aktuális Klipper állapotról.</li>
+</ul>
+<h2 id="z_thermal_adjust">z_thermal_adjust<a class="headerlink" href="#z_thermal_adjust" title="Permanent link">&para;</a></h2>
+<p>A következő információk a <code>z_thermal_adjust</code> parancsal érhetők el (ez a parancs akkor érhető el, ha a <a href="Config_Reference.html#z_thermal_adjust">z_thermal_adjust</a> definiálva van).</p>
+<ul>
+<li><code>enabled</code>: True értéket ad vissza, ha a beállítás engedélyezve van.</li>
+<li><code>temperature</code>: A meghatározott érzékelő aktuális (simított) hőmérséklete. [°C]</li>
+<li><code>measured_min_temp</code>: Minimális mért hőmérséklet. [°C]</li>
+<li><code>measured_max_temp</code>: Maximális mért hőmérséklet. [°C]</li>
+<li><code>current_z_adjust</code>: Utolsó számított Z-beállítás [mm].</li>
+<li><code>z_adjust_ref_temperature</code>: A Z kiszámításához használt aktuális referencia-hőmérséklet <code>current_z_adjust</code> [°C].</li>
 </ul>
 <h2 id="z_tilt">z_tilt<a class="headerlink" href="#z_tilt" title="Permanent link">&para;</a></h2>
 <p>A következő információk a <code>z_tilt</code> objektumban érhetők el (ez az objektum akkor érhető el, ha a z_tilt definiálva van):</p>

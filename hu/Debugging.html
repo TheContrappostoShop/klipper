@@ -169,6 +169,12 @@
                   </a>
                 </li>
                 
+                <li class="md-select__item">
+                  <a href="/it/" hreflang="it" class="md-select__link">
+                    Italiano
+                  </a>
+                </li>
+                
             </ul>
           </div>
         </div>
@@ -495,14 +501,14 @@
       
       
         <label class="md-nav__link" for="__nav_7_4">
-          Ágy szint
+          Tárgyasztal szint
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Ágy szint" data-md-level="2">
+      <nav class="md-nav" aria-label="Tárgyasztal szint" data-md-level="2">
         <label class="md-nav__title" for="__nav_7_4">
           <span class="md-nav__icon md-icon"></span>
-          Ágy szint
+          Tárgyasztal szint
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -513,7 +519,7 @@
   
     <li class="md-nav__item">
       <a href="Bed_Level.html" class="md-nav__link">
-        Ágy szintezése
+        Tárgyasztal szintezése
       </a>
     </li>
   
@@ -583,7 +589,7 @@
   
     <li class="md-nav__item">
       <a href="Bed_Mesh.html" class="md-nav__link">
-        Ágyháló
+        Tárgyasztal háló
       </a>
     </li>
   
@@ -597,7 +603,7 @@
   
     <li class="md-nav__item">
       <a href="Endstop_Phase.html" class="md-nav__link">
-        Végállás szakasz
+        Végállás fázis
       </a>
     </li>
   
@@ -1005,8 +1011,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#a-regresszios-tesztek-futtatasa" class="md-nav__link">
-    A regressziós tesztek futtatása
+  <a href="#regresszios-tesztek-futtatasa" class="md-nav__link">
+    Regressziós tesztek futtatása
   </a>
   
 </li>
@@ -1269,6 +1275,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sponsors.html" class="md-nav__link">
+        Szponzorok
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1296,8 +1317,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#a-regresszios-tesztek-futtatasa" class="md-nav__link">
-    A regressziós tesztek futtatása
+  <a href="#regresszios-tesztek-futtatasa" class="md-nav__link">
+    Regressziós tesztek futtatása
   </a>
   
 </li>
@@ -1376,8 +1397,8 @@
 
 <h1 id="hibakereses">Hibakeresés<a class="headerlink" href="#hibakereses" title="Permanent link">&para;</a></h1>
 <p>Ez a dokumentum a Klipper hibakeresési eszközeinek egy részét ismerteti.</p>
-<h2 id="a-regresszios-tesztek-futtatasa">A regressziós tesztek futtatása<a class="headerlink" href="#a-regresszios-tesztek-futtatasa" title="Permanent link">&para;</a></h2>
-<p>A Klipper GitHub fő tárolója a "github actions" -t használja egy sor regressziós teszt futtatásához. Hasznos lehet néhány ilyen tesztet helyben futtatni.</p>
+<h2 id="regresszios-tesztek-futtatasa">Regressziós tesztek futtatása<a class="headerlink" href="#regresszios-tesztek-futtatasa" title="Permanent link">&para;</a></h2>
+<p>A Klipper GitHub fő tárolója a "github actions"-t használja egy sor regressziós teszt futtatásához. Hasznos lehet néhány ilyen tesztet helyben futtatni.</p>
 <p>A forráskód "whitespace check" a következővel futtatható:</p>
 <div class="highlight"><pre><span></span><code>./scripts/check_whitespace.sh
 </code></pre></div>
@@ -1388,20 +1409,20 @@
 </code></pre></div>
 
 <h2 id="parancsok-kezi-kuldese-a-mikrokontrollernek">Parancsok kézi küldése a mikrokontrollernek<a class="headerlink" href="#parancsok-kezi-kuldese-a-mikrokontrollernek" title="Permanent link">&para;</a></h2>
-<p>Normális esetben a G-kód parancsokat a klippy.py folyamat fordítja Klipper mikrokontroller parancsokra. Azonban az is lehetséges, hogy manuálisan küldjük el ezeket az MCU-parancsokat (a Klipper forráskódjában a DECL_COMMAND() makróval jelölt függvények). Ehhez futtassa a következőket:</p>
+<p>Normális esetben a G-kód parancsokat a klippy.py folyamat fordítja Klipper mikrokontroller parancsokra. Azonban az is lehetséges, hogy manuálisan küldjük el ezeket az MCU-parancsokat (a Klipper forráskódjában a DECL_COMMAND() makróval jelölt függvények). Ehhez futtasd a következőket:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/console.py /tmp/pseudoserial
 </code></pre></div>
 
-<p>Az eszközön belül a "HELP" parancsban talál további információkat a funkcióiról.</p>
-<p>Néhány parancssori opció is rendelkezésre áll. További információkért futtassa a: <code>~/klippy-env/bin/python ./klippy/console.py --help</code> parancsot</p>
+<p>Az eszközön belül a "HELP" parancsban találsz további információkat a funkcióiról.</p>
+<p>Néhány parancssori opció is rendelkezésre áll. További információkért futtasd a: <code>~/klippy-env/bin/python ./klippy/console.py --help</code> parancsot</p>
 <h2 id="a-g-kod-fajlok-leforditasa-mikrokontroller-parancsokra">A G-kód fájlok lefordítása mikrokontroller-parancsokra<a class="headerlink" href="#a-g-kod-fajlok-leforditasa-mikrokontroller-parancsokra" title="Permanent link">&para;</a></h2>
-<p>A Klippy gazdagép kódja futhat kötegelt üzemmódban, hogy előállítsa a G-kód fájlhoz tartozó alacsony szintű mikrokontroller-parancsokat. Ezeknek az alacsony szintű parancsoknak a vizsgálata hasznos, amikor megpróbálja megérteni az alacsony szintű hardver műveleteit. Az is hasznos lehet, hogy összehasonlítsuk a mikrokontroller-parancsok közötti különbséget egy kódváltás után.</p>
-<p>A Klippy futtatásához ebben a kötegelt üzemmódban egy egyszeri lépés szükséges a mikrokontroller "adatszótár" létrehozásához. Ez a mikrokontroller kódjának lefordításával történik, hogy megkapjuk a <strong>out/klipper.dict</strong> fájlt:</p>
+<p>A Klippy gazdagép kódja futhat kötegelt üzemmódban, hogy előállítsa a G-kód fájlhoz tartozó alacsony szintű mikrokontroller-parancsokat. Ezeknek az alacsony szintű parancsoknak a vizsgálata hasznos, amikor megpróbálod megérteni az alacsony szintű hardver műveleteit. Az is hasznos lehet, hogy összehasonlítsuk a mikrokontroller-parancsok közötti különbséget egy kódváltás után.</p>
+<p>A Klippy futtatásához ebben a kötegelt üzemmódban egy egyszeri lépés szükséges a mikrokontroller "adatszótár" létrehozásához. Ez a mikrokontroller kódjának lefordításával történik, hogy megkapjuk az <strong>out/klipper.dict</strong> fájlt:</p>
 <div class="highlight"><pre><span></span><code>make menuconfig
 make
 </code></pre></div>
 
-<p>Ha a fentiek megtörténtek, a Klipper futtatása batch üzemmódban is lehetséges (a python virtuális környezet és a printer.cfg) fájl létrehozásához szükséges lépéseket lásd <a href="Installation.html">Telepítés</a>:</p>
+<p>Ha a fentiek megtörténtek, a Klipper futtatása batch üzemmódban is lehetséges (a <a href="Installation.html">Telepítés</a> python virtuális környezet és a printer.cfg) fájl létrehozásához szükséges lépéseket lásd:</p>
 <div class="highlight"><pre><span></span><code>~/klippy-env/bin/python ./klippy/klippy.py ~/printer.cfg -i test.gcode -o test.serial -v -d out/klipper.dict
 </code></pre></div>
 
@@ -1410,7 +1431,7 @@ make
 </code></pre></div>
 
 <p>Az eredményül kapott <strong>test.txt</strong> fájl a mikrokontroller parancsok ember által olvasható listáját tartalmazza.</p>
-<p>A kötegelt üzemmód letilt bizonyos válasz/kérési parancsokat a működés érdekében. Ennek eredményeképpen a tényleges parancsok és a fenti kimenet között némi eltérés lesz. A generált adatok teszteléshez és ellenőrzéshez hasznosak; nem használhatóak valódi mikrokontrollerhez való elküldésre.</p>
+<p>A kötegelt üzemmód letilt bizonyos válasz/kérés parancsokat a működés érdekében. Ennek eredményeképpen a tényleges parancsok és a fenti kimenet között némi eltérés lesz. A generált adatok teszteléshez és ellenőrzéshez hasznosak; nem használhatóak valódi mikrokontrollerhez való elküldésre.</p>
 <h2 id="mozgaselemzes-es-adatnaplozas">Mozgáselemzés és adatnaplózás<a class="headerlink" href="#mozgaselemzes-es-adatnaplozas" title="Permanent link">&para;</a></h2>
 <p>A Klipper támogatja a belső mozgástörténet naplózását, amely később elemezhető. Ennek a funkciónak a használatához a Klippert az <a href="API_Server.html">API Szerver</a> engedélyezésével kell elindítani.</p>
 <p>Az adatnaplózást a <code>data_logger.py</code> eszközzel lehet engedélyezni. Például:</p>
@@ -1436,7 +1457,7 @@ sudo apt-get install python-matplotlib
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py -l
 </code></pre></div>
 
-<p>Lehetőség van arra is, hogy minden egyes adatkészlethez matplotlib ábrázolási opciókat adjon meg:</p>
+<p>Lehetőség van arra is, hogy minden egyes adatkészlethez matplotlib ábrázolási opciókat adj meg:</p>
 <div class="highlight"><pre><span></span><code>~/klipper/scripts/motan/motan_graph.py mylog -g &#39;[[&quot;trapq(toolhead,velocity)?color=red&amp;alpha=0.4&quot;]]&#39;
 </code></pre></div>
 
@@ -1455,7 +1476,7 @@ sudo apt-get install python-matplotlib
 </code></pre></div>
 
 <p>Ezután megtekinthetjük az eredményül kapott <strong>loadgraph.png</strong> fájlt.</p>
-<p>Különböző grafikonok készíthetők. További információért futtassa: <code>~/klipper/scripts/graphstats.py --help</code></p>
+<p>Különböző grafikonok készíthetők. További információért futtasd: <code>~/klipper/scripts/graphstats.py --help</code></p>
 <h2 id="informaciok-kinyerese-a-klippylog-fajlbol">Információk kinyerése a klippy.log fájlból<a class="headerlink" href="#informaciok-kinyerese-a-klippylog-fajlbol" title="Permanent link">&para;</a></h2>
 <p>A Klippy naplófájl (/tmp/klippy.log) szintén tartalmaz hibakeresési információkat. Van egy logextract.py szkript, amely hasznos lehet egy mikrokontroller leállásának vagy hasonló problémának az elemzésekor. Általában valami ilyesmivel futtatható:</p>
 <div class="highlight"><pre><span></span><code>mkdir work_directory
@@ -1466,8 +1487,8 @@ cp /tmp/klippy.log .
 
 <p>A szkript kinyeri a nyomtató konfigurációs fájlját, és kinyeri az MCU leállítási adatait. Az MCU leállításából származó információsor (ha van ilyen) időbélyegek szerint át lesz rendezve, hogy segítse az ok-okozati forgatókönyvek diagnosztizálását.</p>
 <h2 id="teszteles-simulavr-rel">Tesztelés simulavr-rel<a class="headerlink" href="#teszteles-simulavr-rel" title="Permanent link">&para;</a></h2>
-<p>A <a href="http://www.nongnu.org/simulavr/">simulavr</a> eszköz lehetővé teszi egy Atmel ATmega mikrokontroller szimulálását. Ez a szakasz leírja, hogyan lehet teszt G-kód fájlokat futtatni a simulavr segítségével. Javasoljuk, hogy ezt egy asztali gépen futtassuk (nem Raspberry Pi), mivel a hatékony futtatáshoz erős CPU-ra van szükség.</p>
-<p>A simulavr használatához töltse le a simulavr csomagot, és fordítsa le python támogatással. Vegye figyelembe, hogy a build rendszernek telepítenie kell néhány csomagot (például a swig-et) ahhoz, hogy a python modult fel tudja építeni.</p>
+<p>A <a href="http://www.nongnu.org/simulavr/">simulavr</a> eszköz lehetővé teszi egy Atmel ATmega mikrokontroller szimulálását. Ez a szakasz leírja, hogyan lehet teszt G-kód fájlokat futtatni a simulavr segítségével. Javasoljuk, hogy ezt egy asztali gépen futtasd (nem Raspberry Pi), mivel a hatékony futtatáshoz erős CPU-ra van szükség.</p>
+<p>A simulavr használatához töltse le a simulavr csomagot, és fordítsd le python támogatással. Vedd figyelembe, hogy a build rendszernek telepítenie kell néhány csomagot (például a swig-et) ahhoz, hogy a python modult fel tudja építeni.</p>
 <div class="highlight"><pre><span></span><code>git clone git://git.savannah.nongnu.org/simulavr.git
 cd simulavr
 make python
@@ -1486,12 +1507,12 @@ make cfgclean python debian
 sudo dpkg -i build/debian/python3-simulavr*.deb
 </code></pre></div>
 
-<p>A Klipper lefordításához a simulavr-ben való használathoz futtassa a következőt:</p>
+<p>A Klipper lefordításához a simulavr-ben való használathoz futtasd a következőt:</p>
 <div class="highlight"><pre><span></span><code>cd /path/to/klipper
 make menuconfig
 </code></pre></div>
 
-<p>és fordítsa le a mikrokontroller szoftvert egy AVR atmega644p számára, és válassza a SIMULAVR szoftver emulációs támogatást. Ezután lefordíthatjuk a Klippert (futtassuk <code>make</code>), majd indítsuk el a szimulációt a következőkkel:</p>
+<p>és fordítsd le a mikrokontroller szoftvert egy AVR atmega644p számára, és válaszd a SIMULAVR szoftver emulációs támogatást. Ezután lefordíthatjuk a Klippert (futtassuk <code>make</code>), majd indítsuk el a szimulációt a következőkkel:</p>
 <div class="highlight"><pre><span></span><code>PYTHONPATH=/path/to/simulavr/build/pysimulavr/ ./scripts/avrsim.py out/klipper.elf
 </code></pre></div>
 
@@ -1504,7 +1525,7 @@ make menuconfig
 </code></pre></div>
 
 <h3 id="a-simulavr-hasznalata-gtkwave-vel">A simulavr használata gtkwave-vel<a class="headerlink" href="#a-simulavr-hasznalata-gtkwave-vel" title="Permanent link">&para;</a></h3>
-<p>A simulavr egyik hasznos funkciója, hogy képes jelhullámgeneráló fájlokat létrehozni az események pontos időzítésével. Ehhez kövesse a fenti utasításokat, de futtassa az avrsim.py programot a következő parancssorral:</p>
+<p>A simulavr egyik hasznos funkciója, hogy képes jelhullámgeneráló fájlokat létrehozni az események pontos időzítésével. Ehhez kövesd a fenti utasításokat, de futtasd az avrsim.py programot a következő parancssorral:</p>
 <div class="highlight"><pre><span></span><code>PYTHONPATH=/path/to/simulavr/src/python/ ./scripts/avrsim.py out/klipper.elf -t PORTA.PORT,PORTC.PORT
 </code></pre></div>
 

@@ -169,6 +169,12 @@
                   </a>
                 </li>
                 
+                <li class="md-select__item">
+                  <a href="/it/" hreflang="it" class="md-select__link">
+                    Italiano
+                  </a>
+                </li>
+                
             </ul>
           </div>
         </div>
@@ -824,7 +830,7 @@
   
     <li class="md-nav__item">
       <a href="Exclude_Object.html" class="md-nav__link">
-        Exclude Objects
+        排除对象
       </a>
     </li>
   
@@ -999,8 +1005,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#info" class="md-nav__link">
-    info
+  <a href="#_3" class="md-nav__link">
+    信息
   </a>
   
 </li>
@@ -1381,6 +1387,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="Sponsors.html" class="md-nav__link">
+        赞助
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1444,8 +1465,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#info" class="md-nav__link">
-    info
+  <a href="#_3" class="md-nav__link">
+    信息
   </a>
   
 </li>
@@ -1606,7 +1627,7 @@
 </code></pre></div>
 
 <p>上述操作会使主机创建一个Unix本地套接字。之后，客户应用程序可以创建一个套接字链接，从而给Klipper发送命令。</p>
-<p>See the <a href="https://github.com/Arksine/moonraker">Moonraker</a> project for a popular tool that can forward HTTP requests to Klipper's API Server Unix Domain Socket.</p>
+<p>参见<a href="https://github.com/Arksine/moonraker">Moonraker</a>项目，该项目是一个流行的工具，可以将HTTP请求转发到Klipper的API服务器Unix域插座。</p>
 <h2 id="_1">请求格式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>套接字进出的数据包应使用JSON编码的字符串，并以ASCII字符0x03作为结尾：</p>
 <div class="highlight"><pre><span></span><code>&lt;json_object_1&gt;&lt;0x03&gt;&lt;json_object_2&gt;&lt;0x03&gt;...
@@ -1640,7 +1661,7 @@
 <p>A subscription request accepts a "response_template" dictionary in the "params" field of the request. That "response_template" dictionary is used as a template for future asynchronous messages - it may contain arbitrary key/value pairs. When sending these future asynchronous messages, Klipper will add a "params" field containing a dictionary with "endpoint" specific contents to the response template and then send that template. If a "response_template" field is not provided then it defaults to an empty dictionary (<code>{}</code>).</p>
 <h2 id="endpoint">可用的"endpoint"<a class="headerlink" href="#endpoint" title="Permanent link">&para;</a></h2>
 <p>By convention, Klipper "endpoints" are of the form <code>&lt;module_name&gt;/&lt;some_name&gt;</code>. When making a request to an "endpoint", the full name must be set in the "method" parameter of the request dictionary (eg, <code>{"method"="gcode/restart"}</code>).</p>
-<h3 id="info">info<a class="headerlink" href="#info" title="Permanent link">&para;</a></h3>
+<h3 id="_3">信息<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>The "info" endpoint is used to obtain system and version information from Klipper. It is also used to provide the client's version information to Klipper. For example: <code>{"id": 123, "method": "info", "params": { "client_info": { "version": "v1"}}}</code></p>
 <p>If present, the "client_info" parameter must be a dictionary, but that dictionary may have arbitrary contents. Clients are encouraged to provide the name of the client and its software version when first connecting to the Klipper API server.</p>
 <h3 id="emergency_stop">emergency_stop<a class="headerlink" href="#emergency_stop" title="Permanent link">&para;</a></h3>
