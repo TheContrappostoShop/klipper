@@ -11,6 +11,7 @@
 #include "board/usb_cdc.h" // usb_notify_ep0
 #include "board/usb_cdc_ep.h" // USB_CDC_EP_BULK_IN
 #include "board/usbstd.h" // USB_ENDPOINT_XFER_INT
+#include "board/irq.h" // irq_disable
 #include "hardware/regs/sysinfo.h" // SYSINFO_CHIP_ID_OFFSET
 #include "hardware/regs/m0plus.h" // M0PLUS_AIRCR_SYSRESETREQ_BITS
 #include "hardware/structs/iobank0.h" // iobank0_hw
