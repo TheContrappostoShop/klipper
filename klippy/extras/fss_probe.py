@@ -1,6 +1,7 @@
 # Force Sensor Probe support for MSLA Printers
 #
-# Copyright (C) 2022  Pascal Wistinghausen (pascal.wistinghausen@ib-wistinghausen.de)
+# Copyright (C) 2022  Pascal Wistinghausen 
+# (pascal.wistinghausen@ib-wistinghausen.de)
 # Based on previous works by Kevin O'Connor
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
