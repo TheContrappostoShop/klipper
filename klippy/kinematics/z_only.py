@@ -10,7 +10,7 @@ class ZonlyKinematics:
     def __init__(self, toolhead, config):
         self.printer = config.get_printer()
         # Setup z axis rail
-        self.z_rail = stepper.LookupMultiRail(config.getsection('stepper_z'))		
+        self.z_rail = stepper.LookupMultiRail(config.getsection('stepper_z'))
 
         self.z_rail.setup_itersolve('cartesian_stepper_alloc', 'z'.encode())
         for s in self.get_steppers():
@@ -56,7 +56,7 @@ class ZonlyKinematics:
             forcepos += 1.5 * (position_max - hi.position_endstop)
         # Perform homing
         homing_state.home_rails(
-            [self.z_rail], 
+            [self.z_rail],
             [None, None, forcepos, None],
             [None, None, hi.position_endstop, None]
         )
@@ -71,7 +71,8 @@ class ZonlyKinematics:
 
     def _check_endstops(self, move):
         end_pos = move.end_pos[2]
-        if move.axes_d[2] and (end_pos < self.limit[0] or end_pos > self.limit[1]):
+        if (move.axes_d[2] and
+                (end_pos < self.limit[0] or end_pos > self.limit[1])):
             if self.limit[0] > self.limit[1]:
                 raise move.move_error("Must home axis first")
             raise move.move_error()
@@ -86,7 +87,7 @@ class ZonlyKinematics:
         move.limit_speed(
             self.max_z_velocity * z_ratio, self.max_z_accel * z_ratio)
 
-    def get_status(self, eventtime):        
+    def get_status(self, eventtime):
         return {
             'homed_axes': "z" if self.limit[0]<self.limit[1] else "",
             'axis_minimum': self.axes_min,

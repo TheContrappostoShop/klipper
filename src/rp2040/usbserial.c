@@ -272,7 +272,9 @@ usb_reset(void)
 
     nexttrig = timer_read_time() + timer_from_us(500000);
 
-    if((usb_hw->sie_status & (USB_SIE_STATUS_CONNECTED_BITS | USB_SIE_STATUS_SUSPENDED_BITS)) == USB_SIE_STATUS_CONNECTED_BITS)
+    if((usb_hw->sie_status &
+        (USB_SIE_STATUS_CONNECTED_BITS | USB_SIE_STATUS_SUSPENDED_BITS))
+            == USB_SIE_STATUS_CONNECTED_BITS)
         return;
 
     if(watchdog_hw->reason == 0)
@@ -285,7 +287,6 @@ usb_reset(void)
     watchdog_hw->scratch[5] = 0;
 
     return;
-    
 }
 DECL_TASK(usb_reset);
 
