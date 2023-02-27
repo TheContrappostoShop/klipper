@@ -51,7 +51,10 @@ class ShellCommand:
         reactor = self.printer.get_reactor()
         try:
             proc = subprocess.Popen(
-                self.command + gcode_params, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                self.command + gcode_params,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT
+            )
         except Exception:
             logging.exception(
                 "shell_command: Command {%s} failed" % (self.name))
