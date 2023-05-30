@@ -32,19 +32,19 @@ class Odyssey:
         self.gcode = self.printer.lookup_object('gcode')
 
         self.gcode.register_command(
-            "START",
+            "ODYSSEY_START",
             self.cmd_START,
             desc=self.cmd_START_help)
         self.gcode.register_command(
-            "CANCEL_PRINT",
+            "ODYSSEY_CANCEL_PRINT",
             self.cmd_CANCEL,
             desc=self.cmd_CANCEL_help)
         self.gcode.register_command(
-            "PAUSE",
+            "ODYSSEY_PAUSE",
             self.cmd_PAUSE,
             desc=self.cmd_PAUSE_help)
         self.gcode.register_command(
-            "RESUME",
+            "ODYSSEY_RESUME",
             self.cmd_RESUME,
             desc=self.cmd_RESUME_help)
         #self.gcode.register_command(
