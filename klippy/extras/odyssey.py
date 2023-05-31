@@ -94,7 +94,7 @@ class Odyssey:
         
         self.print_stats.set_current_file(f"{location}/{filename}")
         self.print_stats.note_start()
-        self.reactor.update_timer(self.work_time, self.reactor.NOW)
+        self.reactor.update_timer(self.work_timer, self.reactor.NOW)
 
 
     
