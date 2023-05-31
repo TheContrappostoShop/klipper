@@ -121,7 +121,7 @@ class Odyssey:
             raise gcmd.error("Unable to communicate with Odyssey")
         
         self.print_stats.note_start()
-        self.reactor.update_timer(self.odyssey_work_tracker, self.reactor.NOW)
+        self.reactor.update_timer(self.work_timer, self.reactor.NOW)
 
     
     def odyssey_work_tracker(self, eventtime):
