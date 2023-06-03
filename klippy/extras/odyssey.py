@@ -74,14 +74,27 @@ class Odyssey:
                 return response.json()
             except:
                 return {
-                    'Error': response.status_code
+                    f"Error {response.status_code}": {}
                 }
         except:
-            return {'Error': 'Communication error'}
+            return {'Communication Error': {}}
     
     def get_status(self, eventtime):
         self.status = self.load_status()
-        return self.status
+        for status in self.status:
+            ret = {
+                "odyssey_status": status,
+            }
+
+            status_details = self.status.get(status, {})
+            file_data = status_details.get('file_data', {})
+            if status == "Printing":
+                ret.append({
+                    'file_path': f"{file_data.get('location_category')}/{file_data.get('name')}",
+                    'is_active': not status_details['paused'],
+                    'file_position': status_details['layer']
+                })
+            return ret
     
     cmd_START_help = "Starts a new print with Odyssey"
     def cmd_START(self, gcmd):
