@@ -90,7 +90,7 @@ class Odyssey:
             print_data = status_details.get('print_data', {})
             file_data = print_data.get('file_data', {})
             if status == "Printing":
-                ret.append({
+                ret.update({
                     'file_path': f"{file_data.get('location_category')}/{file_data.get('name')}",
                     'is_active': not status_details.get('paused'),
                     'file_position': status_details.get('layer'),
