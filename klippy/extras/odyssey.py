@@ -15,12 +15,6 @@ class Odyssey:
         
         # Print Stat Tracking
         self.print_stats = self.printer.load_object(config, 'print_stats')
-        
-        # Virtual SD Card module
-        try:
-            self.virtual_sdcard = self.printer.load_object(config, "virtual_sdcard")
-        except:
-            self.virtual_sdcard = None
 
         # Work timer
         self.reactor = self.printer.get_reactor()
@@ -87,23 +81,48 @@ class Odyssey:
     
     def get_status(self, eventtime):
         self.status = self.load_status()
-        for status in self.status:
-            ret = {
-                "odyssey_status": status,
-            }
-
-            status_details = self.status.get(status, {})
-            print_data = status_details.get('print_data', {})
-            file_data = print_data.get('file_data', {})
-            if status == "Printing":
-                ret.update({
-                    'file_path': f"{file_data.get('location_category')}/{file_data.get('name')}",
-                    'is_active': not status_details.get('paused'),
-                    'file_position': status_details.get('layer'),
-                    'progress': status_details.get('layer')/print_data.get('layer_count')
-                })
-            return ret
+        return {
+            "odyssey_status": self.print_status(),
+            'file_path': self.file_path(),
+            'is_active': self.is_active(),
+            'file_position': self.file_position(),
+            'progress': self.progress()
+        }
     
+    def location_category(self):
+        return self.status_details().get('print_data',{}).get('file_data',{}).get("location_category")
+
+    def file_name(self):
+        return self.status_details().get('print_data',{}).get('file_data',{}).get("name")
+
+    def file_path(self):
+        return f"{self.location_category()}/{self.file_name()}"
+    
+    def layer(self):
+        return self.status_details().get('layer', 0)
+    
+    def layer_count(self):
+        return self.status_details().get('print_data',{}).get('layer_count', 1)
+
+    def progress(self):
+        return self.layer()/self.layer_count()
+    
+    def file_position(self):
+        return self.status_details().get('layer', 0)
+    
+    def is_active(self):
+        return self.print_status() == "Printing" and not self.is_paused()
+    
+    def is_paused(self):
+        return self.status_details().get('paused', False)
+    
+    def print_status(self):
+        for print_status in self.status:
+            return print_status
+    
+    def status_details(self):
+        return self.status.get(self.print_status(), {})
+
     cmd_START_help = "Starts a new print with Odyssey"
     def cmd_START(self, gcmd):
         if self.printing:
@@ -119,17 +138,9 @@ class Odyssey:
             elif response.status_code != requests.codes.ok:
                 raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
             
-            self._reset_virtualsd_file()
-            self.print_stats.set_current_file(f"{location}/{filename}")
-            self.print_stats.note_start()
-            self.reactor.update_timer(self.work_timer, self.reactor.NOW)
+            self.reactor.update_timer(self.work_timer, self.reactor.NOW+1)
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
-
-    def _reset_virtualsd_file(self):
-        if self.virtual_sdcard is not None:
-+           logging.info("Clear virtual_sdcard status")
-            virtual_sdcard._reset_file()
 
     
     cmd_CANCEL_help = "Cancels the currently running Odyssey print"
@@ -187,6 +198,12 @@ class Odyssey:
             if "Printing" in self.status:
                 if not self.status['Printing']['paused']:
                     self.printing = True
+
+                    self.print_stats.reset()
+                    
+                    self.print_stats.set_current_file(self.file_path())
+                    self.print_stats.note_start()
+
                     return eventtime+1
 
             return eventtime+10
