@@ -129,7 +129,6 @@ class Odyssey:
             raise gcmd.error("Odyssey Busy")
         location = gcmd.get("LOCATION", default="Local")
         filename = gcmd.get("FILENAME")
-        self.print_stats.reset()
 
         try:
             response = requests.post(f"{self.url}/print/start/{location}/{filename}")
@@ -139,6 +138,8 @@ class Odyssey:
             elif response.status_code != requests.codes.ok:
                 raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
             
+            self.print_stats.set_current_file(self.file_path())
+            self.print_stats.note_start()
             self.reactor.update_timer(self.work_timer, self.reactor.NOW+1)
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
@@ -199,9 +200,6 @@ class Odyssey:
             if "Printing" in self.status:
                 if not self.status['Printing']['paused']:
                     self.printing = True
-                    
-                    self.print_stats.set_current_file(self.file_path())
-                    self.print_stats.note_start()
 
                     return eventtime+1
 
