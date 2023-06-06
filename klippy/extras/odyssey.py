@@ -141,7 +141,7 @@ class Odyssey:
         filename = gcmd.get("FILENAME")
         if filename[0] == '/':
             filename = filename[1:]
-        filename = file_name.rsplit('.', 1)[0]
+        filename = filename.rsplit('.', 1)[0]
         self._START(gcmd, location, filename)
 
     cmd_START_help = "Starts a new print with Odyssey"
