@@ -113,12 +113,19 @@ class Odyssey:
             elif response.status_code != requests.codes.ok:
                 raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
             
+            self._reset_virtualsd_file()
             self.print_stats.set_current_file(f"{location}/{filename}")
             self.print_stats.note_start()
             self.reactor.update_timer(self.work_timer, self.reactor.NOW)
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
 
+    def _reset_virtualsd_file(self):
+        try:
+            virtual_sdcard = self.printer.load_object(config, "virtual_sdcard")
+            virtual_sdcard._reset_file()
+        except config.error:
+            pass
 
     
     cmd_CANCEL_help = "Cancels the currently running Odyssey print"
