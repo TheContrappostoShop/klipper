@@ -129,7 +129,8 @@ class Odyssey:
             raise gcmd.error("Odyssey Busy")
         location = gcmd.get("LOCATION", default="Local")
         filename = gcmd.get("FILENAME")
-        
+        self.print_stats.reset()
+
         try:
             response = requests.post(f"{self.url}/print/start/{location}/{filename}")
 
@@ -198,8 +199,6 @@ class Odyssey:
             if "Printing" in self.status:
                 if not self.status['Printing']['paused']:
                     self.printing = True
-
-                    self.print_stats.reset()
                     
                     self.print_stats.set_current_file(self.file_path())
                     self.print_stats.note_start()
