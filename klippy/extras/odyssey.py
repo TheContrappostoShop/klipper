@@ -16,6 +16,12 @@ class Odyssey:
         # Print Stat Tracking
         self.print_stats = self.printer.load_object(config, 'print_stats')
         
+        # Virtual SD Card module
+        try:
+            self.virtual_sdcard = self.printer.load_object(config, "virtual_sdcard")
+        except:
+            self.virtual_sdcard = None
+
         # Work timer
         self.reactor = self.printer.get_reactor()
         self.must_pause = False
@@ -121,11 +127,9 @@ class Odyssey:
             raise gcmd.error(f"Could not reach odyssey: {e}")
 
     def _reset_virtualsd_file(self):
-        try:
-            virtual_sdcard = self.printer.load_object(config, "virtual_sdcard")
+        if self.virtual_sdcard is not None:
++           logging.info("Clear virtual_sdcard status")
             virtual_sdcard._reset_file()
-        except config.error:
-            pass
 
     
     cmd_CANCEL_help = "Cancels the currently running Odyssey print"
