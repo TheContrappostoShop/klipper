@@ -55,8 +55,17 @@ class Odyssey:
         #    "LIST_FILES",
         #    self.cmd_LIST_FILES,
         #    desc=self.cmd_LIST_FILES_help)
-    
 
+        try:
+            self.printer.add_object('virtual_sdcard', self)
+            self.printer.add_object('pause_resume', self)
+        except Exception as e:
+            raise config.error(
+                "virtual_sdcard and pause_resume must be specified after odyssey\
+                in the config, or left out."
+                )
+
+    
     def handle_shutdown(self):
         try:
             response = requests.post(f"{self.url}/shutdown")
@@ -122,14 +131,25 @@ class Odyssey:
     
     def status_details(self):
         return self.status.get(self.print_status(), {})
+    
+    cmd_SDCARD_PRINT_FILE_help = "Mock SD card functionality for Moonraker's sake"
+    def cmd_SDCARD_PRINT_FILE(self, gcmd):
+        location = gcmd.get("LOCATION", default="Local")
+        filename = gcmd.get("FILENAME")
+        if filename[0] == '/':
+            filename = filename[1:]
+        filename = file_name.rsplit('.', 1)
+        self._START(location, filename)
 
     cmd_START_help = "Starts a new print with Odyssey"
     def cmd_START(self, gcmd):
-        if self.printing:
-            raise gcmd.error("Odyssey Busy")
         location = gcmd.get("LOCATION", default="Local")
         filename = gcmd.get("FILENAME")
+        self._START(location, filename)
 
+    def _START(self, location, filename):
+        if self.printing:
+            raise gcmd.error("Odyssey Busy")
         try:
             response = requests.post(f"{self.url}/print/start/{location}/{filename}")
 
