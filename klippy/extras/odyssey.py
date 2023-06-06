@@ -36,15 +36,15 @@ class Odyssey:
             self.cmd_START,
             desc=self.cmd_START_help)
         self.gcode.register_command(
-            "ODYSSEY_CANCEL_PRINT",
+            "CANCEL_PRINT",
             self.cmd_CANCEL,
             desc=self.cmd_CANCEL_help)
         self.gcode.register_command(
-            "ODYSSEY_PAUSE",
+            "PAUSE",
             self.cmd_PAUSE,
             desc=self.cmd_PAUSE_help)
         self.gcode.register_command(
-            "ODYSSEY_RESUME",
+            "RESUME",
             self.cmd_RESUME,
             desc=self.cmd_RESUME_help)
         #self.gcode.register_command(
@@ -55,6 +55,10 @@ class Odyssey:
         #    "LIST_FILES",
         #    self.cmd_LIST_FILES,
         #    desc=self.cmd_LIST_FILES_help)
+        self.gcode.register_command(
+            "SDCARD_PRINT_FILE",
+            self.cmd_SDCARD_PRINT_FILE,
+            desc=self.cmd_SDCARD_PRINT_FILE_help)
 
         try:
             self.printer.add_object('virtual_sdcard', self)
