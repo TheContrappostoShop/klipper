@@ -36,15 +36,15 @@ class Odyssey:
             self.cmd_START,
             desc=self.cmd_START_help)
         self.gcode.register_command(
-            "CANCEL_PRINT",
+            "ODYSSEY_CANCEL_PRINT",
             self.cmd_CANCEL,
             desc=self.cmd_CANCEL_help)
         self.gcode.register_command(
-            "PAUSE",
+            "ODYSSEY_PAUSE",
             self.cmd_PAUSE,
             desc=self.cmd_PAUSE_help)
         self.gcode.register_command(
-            "RESUME",
+            "ODYSSEY_RESUME",
             self.cmd_RESUME,
             desc=self.cmd_RESUME_help)
         #self.gcode.register_command(
@@ -62,10 +62,9 @@ class Odyssey:
 
         try:
             self.printer.add_object('virtual_sdcard', self)
-            self.printer.add_object('pause_resume', self)
         except Exception as e:
             raise config.error(
-                "virtual_sdcard and pause_resume must be specified after odyssey\
+                "virtual_sdcard must be specified after odyssey\
                 in the config, or left out."
                 )
 
@@ -101,7 +100,7 @@ class Odyssey:
             'file_position': self.file_position(),
             'progress': self.progress()
         }
-    
+
     def location_category(self):
         return self.status_details().get('print_data',{}).get('file_data',{}).get("location_category")
 
@@ -142,16 +141,16 @@ class Odyssey:
         filename = gcmd.get("FILENAME")
         if filename[0] == '/':
             filename = filename[1:]
-        filename = file_name.rsplit('.', 1)
-        self._START(location, filename)
+        filename = file_name.rsplit('.', 1)[0]
+        self._START(gcmd, location, filename)
 
     cmd_START_help = "Starts a new print with Odyssey"
     def cmd_START(self, gcmd):
         location = gcmd.get("LOCATION", default="Local")
         filename = gcmd.get("FILENAME")
-        self._START(location, filename)
+        self._START(gcmd, location, filename)
 
-    def _START(self, location, filename):
+    def _START(self, gcmd, location, filename):
         if self.printing:
             raise gcmd.error("Odyssey Busy")
         try:
@@ -162,7 +161,7 @@ class Odyssey:
             elif response.status_code != requests.codes.ok:
                 raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
             
-            self.print_stats.set_current_file(self.file_path())
+            self.print_stats.set_current_file(f"{location}/{filename}")
             self.print_stats.note_start()
             self.reactor.update_timer(self.work_timer, self.reactor.NOW+1)
         except Exception as e:
