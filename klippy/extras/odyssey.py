@@ -47,14 +47,6 @@ class Odyssey:
             "ODYSSEY_RESUME",
             self.cmd_RESUME,
             desc=self.cmd_RESUME_help)
-        #self.gcode.register_command(
-        #    "ODYSSEY_STATUS",
-        #    self.cmd_PAUSE,
-        #    desc=self.cmd_PAUSE_help)
-        #self.gcode.register_command(
-        #    "LIST_FILES",
-        #    self.cmd_LIST_FILES,
-        #    desc=self.cmd_LIST_FILES_help)
         self.gcode.register_command(
             "SDCARD_PRINT_FILE",
             self.cmd_SDCARD_PRINT_FILE,
