@@ -12,6 +12,9 @@ class Odyssey:
                                             self.handle_shutdown)
 
         self.url = config.get('url')
+
+        # Swallow virtual_sdcard path config
+        self.path = config.getsection('virtual_sdcard').get('path')
         
         # Print Stat Tracking
         self.print_stats = self.printer.load_object(config, 'print_stats')
@@ -48,18 +51,17 @@ class Odyssey:
             self.cmd_RESUME,
             desc=self.cmd_RESUME_help)
         self.gcode.register_command(
+            "ODYSSEY_STATUS",
+            self.cmd_STATUS,
+            desc=self.cmd_STATUS_help)
+        self.gcode.register_command(
             "SDCARD_PRINT_FILE",
             self.cmd_SDCARD_PRINT_FILE,
             desc=self.cmd_SDCARD_PRINT_FILE_help)
 
-        try:
-            self.printer.add_object('virtual_sdcard', self)
-        except Exception as e:
-            raise config.error(
-                "virtual_sdcard must be specified after odyssey\
-                in the config, or left out."
-                )
-
+        # Remove virtual_sdcard object and spoof this class as a fake replacement for Moonraker's sake
+        self.printer.objects.popitem('virtual_sdcard')
+        self.printer.add_object('virtual_sdcard', self)
     
     def handle_shutdown(self):
         try:
@@ -195,6 +197,14 @@ class Odyssey:
             
             self.print_stats.note_start()
             self.reactor.update_timer(self.work_timer, self.reactor.NOW)
+        except Exception as e:
+            raise gcmd.error(f"Could not reach odyssey: {e}")
+
+
+    cmd_STATUS_help = "Print the raw Odyssey status message"
+    def cmd_STATUS(self, gcmd):
+        try:
+            gcmd.respond_info(self.load_status())
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
 
