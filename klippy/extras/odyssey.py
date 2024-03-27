@@ -204,7 +204,7 @@ class Odyssey:
     cmd_STATUS_help = "Print the raw Odyssey status message"
     def cmd_STATUS(self, gcmd):
         try:
-            gcmd.respond_info(self.load_status())
+            gcmd.respond_info(json.dumps(self.load_status(), indent=4))
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
 
