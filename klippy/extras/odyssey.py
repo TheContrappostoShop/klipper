@@ -94,7 +94,7 @@ class Odyssey:
             'file_path': self.file_path(),
             'is_active': self.is_active(),
             'file_position': self.file_position(),
-            'progress': self.progress()
+            'progress': self.progress(),
             'file_size': self.layer_count(),
         }
 
