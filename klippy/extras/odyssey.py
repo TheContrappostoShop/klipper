@@ -132,7 +132,7 @@ class Odyssey:
     def status_details(self):
         return self.status.get(self.print_status(), {})
 
-    cmd_SDCARD_RESET_FILE_help = "Clears a loaded File, instructing Odyssey to stop the print.
+    cmd_SDCARD_RESET_FILE_help = "Clears a loaded File, instructing Odyssey to stop the print."
     def cmd_SDCARD_RESET_FILE(self, gcmd):
         self._reset_file()
     
