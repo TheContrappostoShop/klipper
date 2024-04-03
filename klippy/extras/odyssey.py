@@ -208,8 +208,8 @@ class Odyssey:
     def _PAUSE(self):
         try:
             response = requests.post(f"{self.url}/print/pause")
-            except Exception as e:
-        raise gcmd.error(f"Could not reach odyssey: {e}")
+        except Exception as e:
+            raise gcmd.error(f"Could not reach odyssey: {e}")
 
         if response.status_code != requests.codes.ok:
             raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
@@ -256,7 +256,6 @@ class Odyssey:
                 if not self.status['Printing']['paused']:
                     self.printing = True
                     self.print_stats.note_start()
-
                     return eventtime+1
 
             return eventtime+10
