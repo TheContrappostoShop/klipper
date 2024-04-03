@@ -132,6 +132,17 @@ class Odyssey:
     def status_details(self):
         return self.status.get(self.print_status(), {})
 
+    ### Virtual_SdCard spoof methods
+    def do_pause(self):
+        self._PAUSE()
+
+    def do_resume(self):
+        self._RESUME()
+
+    def do_cancel(self):
+        self._CANCEL()
+        self.print_stats.note_cancel()
+
     cmd_SDCARD_RESET_FILE_help = "Clears a loaded File, instructing Odyssey to stop the print."
     def cmd_SDCARD_RESET_FILE(self, gcmd):
         self._reset_file()
@@ -177,7 +188,6 @@ class Odyssey:
     cmd_CANCEL_help = "Cancels the currently running Odyssey print"
     def cmd_CANCEL(self, gcmd):
         self._CANCEL()
-        self.print_stats.note_cancel()
     
     def _CANCEL(self):
         try:
@@ -193,26 +203,32 @@ class Odyssey:
 
     cmd_PAUSE_help = "Pauses the currently running Odyssey print"
     def cmd_PAUSE(self, gcmd):
+        self._PAUSE()
+
+    def _PAUSE(self):
         try:
             response = requests.post(f"{self.url}/print/pause")
-            if response.status_code != requests.codes.ok:
-                raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
+            except Exception as e:
+        raise gcmd.error(f"Could not reach odyssey: {e}")
 
-        except Exception as e:
-            raise gcmd.error(f"Could not reach odyssey: {e}")
+        if response.status_code != requests.codes.ok:
+            raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
 
 
     cmd_RESUME_help = "Resumes the currently paused Odyssey print"
     def cmd_RESUME(self, gcmd):
+        self._RESUME()
+
+    def _RESUME(self):
         try:
             response = requests.post(f"{self.url}/print/resume")
-            if response.status_code != requests.codes.ok:
-                raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
-            
-            self.print_stats.note_start()
-            self.reactor.update_timer(self.work_timer, self.reactor.NOW)
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
+        
+        if response.status_code != requests.codes.ok:
+            raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
+
+        self.reactor.update_timer(self.work_timer, self.reactor.NOW)
 
 
     cmd_STATUS_help = "Print the raw Odyssey status message"
@@ -239,6 +255,7 @@ class Odyssey:
             if "Printing" in self.status:
                 if not self.status['Printing']['paused']:
                     self.printing = True
+                    self.print_stats.note_start()
 
                     return eventtime+1
 
