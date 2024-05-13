@@ -147,7 +147,7 @@ class Odyssey:
     def cmd_SDCARD_RESET_FILE(self, gcmd):
         self._reset_file()
     
-    def _SDCARD_RESET_FILE():
+    def _SDCARD_RESET_FILE(self):
         self.print_stats.reset()
         self._CANCEL()
         self.printer.send_event("virtual_sdcard:reset_file")
@@ -187,9 +187,9 @@ class Odyssey:
     
     cmd_CANCEL_help = "Cancels the currently running Odyssey print"
     def cmd_CANCEL(self, gcmd):
-        self._CANCEL()
+        self._CANCEL(gcmd)
     
-    def _CANCEL(self):
+    def _CANCEL(self, gcmd):
         try:
             response = requests.post(f"{self.url}/print/cancel")
         except Exception as e:
@@ -203,9 +203,9 @@ class Odyssey:
 
     cmd_PAUSE_help = "Pauses the currently running Odyssey print"
     def cmd_PAUSE(self, gcmd):
-        self._PAUSE()
+        self._PAUSE(gcmd)
 
-    def _PAUSE(self):
+    def _PAUSE(self, gcmd):
         try:
             response = requests.post(f"{self.url}/print/pause")
         except Exception as e:
@@ -217,9 +217,9 @@ class Odyssey:
 
     cmd_RESUME_help = "Resumes the currently paused Odyssey print"
     def cmd_RESUME(self, gcmd):
-        self._RESUME()
+        self._RESUME(gcmd)
 
-    def _RESUME(self):
+    def _RESUME(self, gcmd):
         try:
             response = requests.post(f"{self.url}/print/resume")
         except Exception as e:
