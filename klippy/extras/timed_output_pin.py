@@ -6,6 +6,12 @@ class TimedOutputPin:
         self.printer = config.get_printer()
         self.pin = PrinterOutputPin(config)
         self.reactor = self.printer.get_reactor()
+
+        pin_name = config.get_name().split()[1]
+        gcode = self.printer.lookup_object('gcode')
+        gcode.register_mux_command("SET_PIN", "PIN", pin_name,
+                                   self.cmd_SET_PIN,
+                                   desc=self.cmd_SET_PIN_help)
     
     cmd_SET_PIN_TIMED_help = "Set the value of an output pin for the given time, and return the given response after the pin is reset"
     def cmd_SET_PIN_TIMED(self, gcmd):
