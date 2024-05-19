@@ -96,35 +96,34 @@ class Odyssey:
         }
 
     def location_category(self):
-        return self.status_details().get('print_data',{}).get('file_data',{}).get("location_category")
+        return self.status.get('print_data',{}).get('file_data',{}).get("location_category")
 
     def file_name(self):
-        return self.status_details().get('print_data',{}).get('file_data',{}).get("name")
+        return self.status.get('print_data',{}).get('file_data',{}).get("name")
 
     def file_path(self):
-        return f"{self.location_category()}/{self.file_name()}"
+        return self.status.get('print_data',{}).get('file_data',{}).get("path")
     
     def layer(self):
-        return self.status_details().get('layer', 0)
+        return self.status.get('layer', 0)
     
     def layer_count(self):
-        return self.status_details().get('print_data',{}).get('layer_count', 1)
+        return self.status.get('print_data',{}).get('layer_count', 1)
 
     def progress(self):
         return self.layer()/self.layer_count()
     
     def file_position(self):
-        return self.status_details().get('layer', 0)
+        return self.status.get('layer', 0)
     
     def is_active(self):
         return self.print_status() == "Printing" and not self.is_paused()
     
     def is_paused(self):
-        return self.status_details().get('paused', False)
+        return self.status.get('paused', False)
     
     def print_status(self):
-        for print_status in self.status:
-            return print_status
+        self.status.get('status', 'Shutdown')
     
     def status_details(self):
         return self.status.get(self.print_status(), {})
