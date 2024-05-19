@@ -29,7 +29,7 @@ class Odyssey:
 
         self.printing = False
 
-        self.status = self.load_status()
+        self.status = {}
 
         
         self.gcode = self.printer.lookup_object('gcode')
