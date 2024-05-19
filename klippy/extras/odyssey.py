@@ -96,19 +96,19 @@ class Odyssey:
         }
 
     def location_category(self):
-        return self.status.get('print_data',{}).get('file_data',{}).get("location_category")
+        return self.print_data().get('file_data',{}).get("location_category")
 
     def file_name(self):
-        return self.status.get('print_data',{}).get('file_data',{}).get("name")
+        return self.print_data().get('file_data',{}).get("name")
 
     def file_path(self):
-        return self.status.get('print_data',{}).get('file_data',{}).get("path")
+        return self.print_data().get('file_data',{}).get("path")
     
     def layer(self):
         return self.status.get('layer', 0)
     
     def layer_count(self):
-        return self.status.get('print_data',{}).get('layer_count', 1)
+        return self.print_data().get('layer_count', 1)
 
     def progress(self):
         return self.layer()/self.layer_count()
@@ -125,8 +125,8 @@ class Odyssey:
     def print_status(self):
         self.status.get('status', 'Shutdown')
     
-    def status_details(self):
-        return self.status.get(self.print_status(), {})
+    def print_data(self):
+        return self.status.get('print_data') or {}
     
     cmd_SDCARD_PRINT_FILE_help = "Mock SD card functionality for Moonraker's sake"
     def cmd_SDCARD_PRINT_FILE(self, gcmd):
