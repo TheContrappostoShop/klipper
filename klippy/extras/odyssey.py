@@ -132,29 +132,30 @@ class Odyssey:
     def cmd_SDCARD_PRINT_FILE(self, gcmd):
         location = gcmd.get("LOCATION", default="Local")
         filename = gcmd.get("FILENAME")
-        if filename[0] == '/':
-            filename = filename[1:]
-        filename = filename.rsplit('.', 1)[0]
         self._START(gcmd, location, filename)
 
     cmd_START_help = "Starts a new print with Odyssey"
     def cmd_START(self, gcmd):
         location = gcmd.get("LOCATION", default="Local")
-        filename = gcmd.get("FILENAME")
-        self._START(gcmd, location, filename)
+        filepath = gcmd.get("PATH")
+        self._START(gcmd, location, filepath)
 
-    def _START(self, gcmd, location, filename):
+    def _START(self, gcmd, location, filepath):
         if self.printing:
             raise gcmd.error("Odyssey Busy")
         try:
-            response = requests.post(f"{self.url}/print/start/{location}/{filename}")
+            params = {
+                "file_path": filepath,
+                "location": location
+            }
+            response = requests.post(f"{self.url}/print/start", params=params)
 
             if response.status_code == requests.codes.not_found:
                 raise gcmd.error("Odyssey could not find the requested file")
             elif response.status_code != requests.codes.ok:
                 raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
             
-            self.print_stats.set_current_file(f"{location}/{filename}")
+            self.print_stats.set_current_file(filepath)
             self.print_stats.note_start()
             self.reactor.update_timer(self.work_timer, self.reactor.NOW+1)
         except Exception as e:
