@@ -105,16 +105,16 @@ class Odyssey:
         return self.print_data().get('file_data',{}).get("path")
     
     def layer(self):
-        return self.status.get('layer', 0)
+        return self.status.get('layer')
     
     def layer_count(self):
         return self.print_data().get('layer_count', 1)
 
     def progress(self):
-        return self.layer()/self.layer_count()
+        return (self.layer() or 0)/self.layer_count()
     
     def file_position(self):
-        return self.status.get('layer', 0)
+        return self.layer()
     
     def is_active(self):
         return self.print_status() == "Printing" and not self.is_paused()
