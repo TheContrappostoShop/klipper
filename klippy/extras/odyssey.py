@@ -131,13 +131,13 @@ class Odyssey:
     cmd_SDCARD_PRINT_FILE_help = "Mock SD card functionality for Moonraker's sake"
     def cmd_SDCARD_PRINT_FILE(self, gcmd):
         location = gcmd.get("LOCATION", default="Local")
-        filename = gcmd.get("FILENAME")
-        self._START(gcmd, location, filename)
+        filepath = gcmd.get("FILENAME").rsplit('.', 1)[0]
+        self._START(gcmd, location, filepath)
 
     cmd_START_help = "Starts a new print with Odyssey"
     def cmd_START(self, gcmd):
         location = gcmd.get("LOCATION", default="Local")
-        filepath = gcmd.get("PATH")
+        filepath = gcmd.get("PATH").rsplit('.', 1)[0]
         self._START(gcmd, location, filepath)
 
     def _START(self, gcmd, location, filepath):
