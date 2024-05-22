@@ -71,7 +71,9 @@ class Odyssey:
 
 
     def stats(self, eventtime):
-        return False, ""
+        if not self.is_active:
+            return False, ""
+        return True, "sd_pos=%d" % (self.file_position(),)
 
     def load_status(self):
         try:
@@ -92,7 +94,8 @@ class Odyssey:
             'file_path': self.file_path(),
             'is_active': self.is_active(),
             'file_position': self.file_position(),
-            'progress': self.progress()
+            'progress': self.progress(),
+            'file_size': self.layer_count(),
         }
 
     def location_category(self):
@@ -124,10 +127,30 @@ class Odyssey:
     
     def print_status(self):
         self.status.get('status', 'Shutdown')
-    
+
+    ### Virtual_SdCard spoof methods
+    def do_pause(self):
+        self._PAUSE()
+
+    def do_resume(self):
+        self._RESUME()
+
+    def do_cancel(self):
+        self._CANCEL()
+        self.print_stats.note_cancel()
+
+    cmd_SDCARD_RESET_FILE_help = "Clears a loaded File, instructing Odyssey to stop the print."
+    def cmd_SDCARD_RESET_FILE(self, gcmd):
+        self._reset_file()
+
     def print_data(self):
         return self.status.get('print_data') or {}
     
+    def _SDCARD_RESET_FILE(self):
+        self.print_stats.reset()
+        self._CANCEL()
+        self.printer.send_event("virtual_sdcard:reset_file")
+
     cmd_SDCARD_PRINT_FILE_help = "Mock SD card functionality for Moonraker's sake"
     def cmd_SDCARD_PRINT_FILE(self, gcmd):
         location = gcmd.get("LOCATION", default="Local")
@@ -164,41 +187,48 @@ class Odyssey:
     
     cmd_CANCEL_help = "Cancels the currently running Odyssey print"
     def cmd_CANCEL(self, gcmd):
+        self._CANCEL(gcmd)
+    
+    def _CANCEL(self, gcmd):
         try:
             response = requests.post(f"{self.url}/print/cancel")
-            
-            if response.status_code != requests.codes.ok:
-                raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
-
-            
-            self.print_stats.note_cancel()
-            self.printing = False
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
+        
+        if response.status_code != requests.codes.ok:
+            raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
+
+        self.printing = False
 
 
     cmd_PAUSE_help = "Pauses the currently running Odyssey print"
     def cmd_PAUSE(self, gcmd):
+        self._PAUSE(gcmd)
+
+    def _PAUSE(self, gcmd):
         try:
             response = requests.post(f"{self.url}/print/pause")
-            if response.status_code != requests.codes.ok:
-                raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
-
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
+
+        if response.status_code != requests.codes.ok:
+            raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
 
 
     cmd_RESUME_help = "Resumes the currently paused Odyssey print"
     def cmd_RESUME(self, gcmd):
+        self._RESUME(gcmd)
+
+    def _RESUME(self, gcmd):
         try:
             response = requests.post(f"{self.url}/print/resume")
-            if response.status_code != requests.codes.ok:
-                raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
-            
-            self.print_stats.note_start()
-            self.reactor.update_timer(self.work_timer, self.reactor.NOW)
         except Exception as e:
             raise gcmd.error(f"Could not reach odyssey: {e}")
+        
+        if response.status_code != requests.codes.ok:
+            raise gcmd.error(f"Odyssey Error Encountered: {response.status_code}: {response.reason}")
+
+        self.reactor.update_timer(self.work_timer, self.reactor.NOW)
 
 
     cmd_STATUS_help = "Print the raw Odyssey status message"
@@ -225,7 +255,7 @@ class Odyssey:
             if "Printing" in self.status:
                 if not self.status['Printing']['paused']:
                     self.printing = True
-
+                    self.print_stats.note_start()
                     return eventtime+1
 
             return eventtime+10
